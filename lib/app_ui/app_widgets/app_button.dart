@@ -9,6 +9,7 @@ class AppBtn extends StatelessWidget {
   final VoidCallback? onTap;
   final double height;
   final double? width;
+  final TextStyle? textStyle;
 
   const AppBtn({
     super.key,
@@ -17,6 +18,7 @@ class AppBtn extends StatelessWidget {
     this.height = 50,
     this.width,
     this.icon,
+    this.textStyle,
   });
 
   @override
@@ -32,7 +34,7 @@ class AppBtn extends StatelessWidget {
           color: AppColors.buttonColor,
         ),
         child: text != null
-            ? Text(text!, style: AppTStyleAndSize.buttonTextStyle())
+            ? Text(text!, style: textStyle ?? AppTStyleAndSize.buttonTextStyle())
             : icon,
       ),
     );

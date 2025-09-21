@@ -8,6 +8,8 @@ class AppAssetsImages {
   static final String facbookImage = '$imageBase/facebook.png';
   static final String continuePhoneImage = '$imageBase/illustration4.png';
   static final String popUpImage = '$imageBase/pop_up_icon.png';
+  static final String avatar = '$imageBase/avatar.png';
+  static final String secondRowImage='$imageBase/row_card_image.png';
   // icon
   static final String search = '$imageBase/search.png';
   static final String person = '$imageBase/person.png';

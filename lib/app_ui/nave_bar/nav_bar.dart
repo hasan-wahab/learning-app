@@ -2,6 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/app_ui/nave_bar/course_screen.dart';
+import 'package:foodi/app_ui/nave_bar/home_screen/home_screen.dart';
+import 'package:foodi/app_ui/nave_bar/message_screen.dart';
+import 'package:foodi/app_ui/nave_bar/profile_screen.dart';
+import 'package:foodi/app_ui/nave_bar/search_screen.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
@@ -25,10 +30,17 @@ class _NavBarState extends State<NavBar> {
     Icons.person,
   ];
   List<String> textList = ['Home', 'Course', 'Search', 'Message', 'Profile'];
-
+  List<Widget> screenList = [
+    HomeScreen(),
+    CourseScreen(),
+    SearchScreen(),
+    MessageScreen(),
+    ProfileScreen(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: screenList.elementAt(currentValue),
       bottomNavigationBar: SafeArea(
         child: SizedBox(
           height: 111.h,
