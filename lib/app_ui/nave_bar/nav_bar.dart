@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
-import 'package:foodi/app_ui/nave_bar/course_screen.dart';
+import 'package:foodi/app_ui/nave_bar/course_screen/course_screen.dart';
 import 'package:foodi/app_ui/nave_bar/home_screen/home_screen.dart';
 import 'package:foodi/app_ui/nave_bar/message_screen.dart';
 import 'package:foodi/app_ui/nave_bar/profile_screen.dart';

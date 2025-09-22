@@ -10,7 +10,6 @@ import 'package:foodi/app_ui/onboarding_scr/on_boarding_secree2.dart';
 import 'app_routes/onGenerateRoute.dart';
 
 void main() {
-
   runApp(
     ScreenUtilInit(
       designSize: Size(375, 812),
@@ -31,9 +30,9 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-home: NavBar(),
+      home: NavBar(),
       // onGenerateRoute: (RouteSettings settings) =>
-      //     AppRouting.onGenerateRoute(settings, context),
+      //   AppRouting.onGenerateRoute(settings, context),
     );
   }
 }

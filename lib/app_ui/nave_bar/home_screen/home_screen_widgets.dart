@@ -42,7 +42,7 @@ Widget firstBlueContainer() {
                   height: 21.h,
                   width: 128.w,
                   child: ReuseableText(
-text: 'Let’s start learning',
+                    text: 'Let’s start learning',
                     textStyle: AppTStyleAndSize.tFieldTextStyle().copyWith(
                       color: Color.fromRGBO(255, 255, 255, 100),
                     ),
@@ -108,11 +108,13 @@ Widget timerWidget() {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ReuseableText(
-               text:  'Learned today',
-                textStyle: AppTStyleAndSize.thirdTextStyle().copyWith(fontSize: 12),
+                text: 'Learned today',
+                textStyle: AppTStyleAndSize.thirdTextStyle().copyWith(
+                  fontSize: 12,
+                ),
               ),
               ReuseableText(
-text: 'My courses',
+                text: 'My courses',
                 textStyle: AppTStyleAndSize.appBarTStyle().copyWith(
                   color: AppColors.buttonColor,
                   fontWeight: FontWeight.normal,
@@ -125,10 +127,15 @@ text: 'My courses',
           Row(
             children: [
               ReuseableText(
-              text:   '40 min',
-                textStyle: AppTStyleAndSize.firstTextStyle().copyWith(fontSize: 20),
+                text: '40 min',
+                textStyle: AppTStyleAndSize.firstTextStyle().copyWith(
+                  fontSize: 20,
+                ),
               ),
-              ReuseableText(text: '/ 60min', textStyle: AppTStyleAndSize.thirdTextStyle()),
+              ReuseableText(
+                text: '/ 60min',
+                textStyle: AppTStyleAndSize.thirdTextStyle(),
+              ),
             ],
           ),
           Row(
@@ -157,8 +164,8 @@ text: 'My courses',
   );
 }
 
-Widget horizontalListOfCard(){
-  return   SizedBox(
+Widget horizontalListOfCard() {
+  return SizedBox(
     height: 154.h,
 
     child: ListView.builder(
@@ -201,8 +208,7 @@ Widget horizontalListOfCard(){
                       width: 85,
                       height: 31,
                       text: 'Get Started',
-                      textStyle: AppTStyleAndSize.buttonTextStyle()
-                          .copyWith(
+                      textStyle: AppTStyleAndSize.buttonTextStyle().copyWith(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
@@ -217,7 +223,8 @@ Widget horizontalListOfCard(){
     ),
   );
 }
-Widget circleWidget({required angle,required String text}){
+
+Widget circleWidget({required angle, required String text}) {
   return Row(
     spacing: AppSize.rowSpacing(width: 13),
     children: [
@@ -227,9 +234,12 @@ Widget circleWidget({required angle,required String text}){
         decoration: BoxDecoration(
           gradient: angle != math.pi * 0.0
               ? SweepGradient(
-            colors: [Color.fromRGBO(112, 112, 112, 100), Color.fromRGBO(244, 243, 253, 100)],
-            endAngle: angle,
-          )
+                  colors: [
+                    Color.fromRGBO(112, 112, 112, 100),
+                    Color.fromRGBO(244, 243, 253, 100),
+                  ],
+                  endAngle: angle,
+                )
               : null,
           shape: BoxShape.circle,
           color: angle == math.pi * 0.0 ? Colors.grey : null,
@@ -249,7 +259,7 @@ Widget circleWidget({required angle,required String text}){
         ),
       ),
       ReuseableText(
-     text:   text,
+        text: text,
         textStyle: AppTStyleAndSize.thirdTextStyle().copyWith(
           fontWeight: FontWeight.w500,
           fontSize: 14,
@@ -259,7 +269,8 @@ Widget circleWidget({required angle,required String text}){
     ],
   );
 }
-Widget learningPlanWidget({required angle1 ,required angle2}){
+
+Widget learningPlanWidget({required angle1, required angle2}) {
   return SizedBox(
     height: 181.h,
     width: 375.w,
@@ -271,7 +282,7 @@ Widget learningPlanWidget({required angle1 ,required angle2}){
           child: Row(
             children: [
               ReuseableText(
-               text:  'Learning plan',
+                text: 'Learning plan',
                 textStyle: AppTStyleAndSize.thirdTextStyle().copyWith(
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
@@ -284,39 +295,45 @@ Widget learningPlanWidget({required angle1 ,required angle2}){
           height: 133.h,
           width: 335.w,
           child: Card(
-              color: Colors.white,
-              child: Padding(
-                padding: AppSize.bodyPadding2(top: 25,left: 16,right: 16),
-                child: Column(
-                  spacing: AppSize.colomnSpacing(height: 18),
-                  children: [
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        circleWidget(angle: angle1,text: 'Packaging design'),
-                        Row(
-                          children: [
-                            Text('40'),
-                            Text('/48',style: AppTStyleAndSize.fourthSmallTextStyle(),),
-                          ],
-                        ),
-                      ],
-                    ),  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        circleWidget(angle: angle2,text: 'Product design'),
-                        Row(
-                          children: [
-                            Text('40'),
-                            Text('/48',style: AppTStyleAndSize.fourthSmallTextStyle(),),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              )
+            color: Colors.white,
+            child: Padding(
+              padding: AppSize.bodyPadding2(top: 25, left: 16, right: 16),
+              child: Column(
+                spacing: AppSize.colomnSpacing(height: 18),
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      circleWidget(angle: angle1, text: 'Packaging design'),
+                      Row(
+                        children: [
+                          Text('40'),
+                          Text(
+                            '/48',
+                            style: AppTStyleAndSize.fourthSmallTextStyle(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      circleWidget(angle: angle2, text: 'Product design'),
+                      Row(
+                        children: [
+                          Text('40'),
+                          Text(
+                            '/48',
+                            style: AppTStyleAndSize.fourthSmallTextStyle(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],

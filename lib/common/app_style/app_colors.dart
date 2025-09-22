@@ -15,4 +15,6 @@ class AppColors {
   static Color homeScrSecondCardColor=Color.fromRGBO(206, 236, 254, 100);
   static Color meetUpCardColor=Color.fromRGBO(239, 224, 255, 100);
   static Color meetUpTextColor=Color.fromRGBO(68, 6, 135, 100);
+  static Color courseRowColor1=Color.fromRGBO(206, 236, 254, 100);
+  static Color courseRowColor2=Color.fromRGBO(239, 224, 255, 100);
 }

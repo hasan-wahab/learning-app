@@ -11,6 +11,8 @@ class AppAssetsImages {
   static final String avatar = '$imageBase/avatar.png';
   static final String secondRowImage='$imageBase/row_card_image.png';
   static final String meetUpImage='$imageBase/meetup.png';
+  static final String courseImage1='$imageBase/courseimage1.png';
+  static final String courseImage2='$imageBase/courseimage2.png';
   // icon
   static final String search = '$imageBase/search.png';
   static final String person = '$imageBase/person.png';

@@ -4,16 +4,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppTextField extends StatelessWidget {
   final String? hintText;
   final Widget? icon;
-  const AppTextField({super.key, this.icon, this.hintText});
+  final Widget? prefixIcon;
+  final double height;
+  final double width;
+  const AppTextField({super.key, this.icon, this.hintText,this.height=50,this.width=327, this.prefixIcon});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.h,
-      width: 327.w,
+      height: height.h,
+      width: width.w,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
       child: TextFormField(
+
         decoration: InputDecoration(
+         prefixIcon:prefixIcon,
+
           hintText: hintText,
           suffixIcon: icon,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r)),

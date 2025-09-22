@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:foodi/app_routes/app_routes.dart';
-import 'package:foodi/app_ui/nave_bar/course_screen.dart';
+import 'package:foodi/app_ui/nave_bar/course_screen/course_screen.dart';
 import 'package:foodi/app_ui/nave_bar/home_screen/home_screen.dart';
 import 'package:foodi/app_ui/nave_bar/message_screen.dart';
 import 'package:foodi/app_ui/nave_bar/nav_bar.dart';
