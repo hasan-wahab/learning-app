@@ -13,4 +13,6 @@ class AppColors {
   static Color leanierColorLowOpacity = Color.fromRGBO(255, 255, 255, 0);
   static Color leanierColorHighOpacity = Color.fromRGBO(255, 81, 6, 100);
   static Color homeScrSecondCardColor=Color.fromRGBO(206, 236, 254, 100);
+  static Color meetUpCardColor=Color.fromRGBO(239, 224, 255, 100);
+  static Color meetUpTextColor=Color.fromRGBO(68, 6, 135, 100);
 }

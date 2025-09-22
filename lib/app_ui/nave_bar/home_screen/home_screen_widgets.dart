@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
@@ -29,9 +30,9 @@ Widget firstBlueContainer() {
                 SizedBox(
                   height: 36.h,
                   width: 118.w,
-                  child: Text(
-                    'Hi,Hasan',
-                    style: AppTStyleAndSize.firstTextStyle().copyWith(
+                  child: ReuseableText(
+                    text: 'Hi,Hasan',
+                    textStyle: AppTStyleAndSize.firstTextStyle().copyWith(
                       color: Colors.white,
                       fontSize: 24,
                     ),
@@ -40,9 +41,9 @@ Widget firstBlueContainer() {
                 SizedBox(
                   height: 21.h,
                   width: 128.w,
-                  child: Text(
-                    'Let’s start learning',
-                    style: AppTStyleAndSize.tFieldTextStyle().copyWith(
+                  child: ReuseableText(
+text: 'Let’s start learning',
+                    textStyle: AppTStyleAndSize.tFieldTextStyle().copyWith(
                       color: Color.fromRGBO(255, 255, 255, 100),
                     ),
                   ),
@@ -106,13 +107,13 @@ Widget timerWidget() {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Learned today',
-                style: AppTStyleAndSize.thirdTextStyle().copyWith(fontSize: 12),
+              ReuseableText(
+               text:  'Learned today',
+                textStyle: AppTStyleAndSize.thirdTextStyle().copyWith(fontSize: 12),
               ),
-              Text(
-                'My courses',
-                style: AppTStyleAndSize.appBarTStyle().copyWith(
+              ReuseableText(
+text: 'My courses',
+                textStyle: AppTStyleAndSize.appBarTStyle().copyWith(
                   color: AppColors.buttonColor,
                   fontWeight: FontWeight.normal,
                   fontSize: 12,
@@ -123,11 +124,11 @@ Widget timerWidget() {
 
           Row(
             children: [
-              Text(
-                '40 min',
-                style: AppTStyleAndSize.firstTextStyle().copyWith(fontSize: 20),
+              ReuseableText(
+              text:   '40 min',
+                textStyle: AppTStyleAndSize.firstTextStyle().copyWith(fontSize: 20),
               ),
-              Text('/ 60min', style: AppTStyleAndSize.thirdTextStyle()),
+              ReuseableText(text: '/ 60min', textStyle: AppTStyleAndSize.thirdTextStyle()),
             ],
           ),
           Row(
@@ -184,9 +185,9 @@ Widget horizontalListOfCard(){
                     child: Image.asset(AppAssetsImages.secondRowImage),
                   ),
                 ),
-                Text(
-                  'What do you want to learn today',
-                  style: AppTStyleAndSize.secondTextStyle().copyWith(
+                ReuseableText(
+                  text: 'What do you want to learn today',
+                  textStyle: AppTStyleAndSize.secondTextStyle().copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
@@ -247,9 +248,9 @@ Widget circleWidget({required angle,required String text}){
           ],
         ),
       ),
-      Text(
-       text,
-        style: AppTStyleAndSize.thirdTextStyle().copyWith(
+      ReuseableText(
+     text:   text,
+        textStyle: AppTStyleAndSize.thirdTextStyle().copyWith(
           fontWeight: FontWeight.w500,
           fontSize: 14,
           color: Colors.black,
@@ -269,9 +270,9 @@ Widget learningPlanWidget({required angle1 ,required angle2}){
           padding: AppSize.bodyPadding2(left: 20),
           child: Row(
             children: [
-              Text(
-                'Learning plan',
-                style: AppTStyleAndSize.thirdTextStyle().copyWith(
+              ReuseableText(
+               text:  'Learning plan',
+                textStyle: AppTStyleAndSize.thirdTextStyle().copyWith(
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
                 ),

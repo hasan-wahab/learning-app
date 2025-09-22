@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 
@@ -11,9 +12,9 @@ class AppTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Text(
-        text,
-        style: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+      child: ReuseableText(
+        text: text,
+        textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
           color: AppColors.buttonColor,
           fontWeight: FontWeight.bold,
         ),

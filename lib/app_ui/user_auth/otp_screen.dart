@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_ui/app_widgets/app_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_field.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/app_ui/nave_bar/nav_bar.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
+
+import '../../app_routes/app_routes.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -32,7 +35,7 @@ class _OtpScreenState extends State<OtpScreen> {
               children: [
                 Icon(Icons.cancel_outlined),
                 AppSize.widgetGap(width: 96.75),
-                Text('Verify Phone', style: AppTStyleAndSize.appBarTStyle()),
+                ReuseableText(text: 'Verify Phone', textStyle: AppTStyleAndSize.appBarTStyle()),
               ],
             ),
           ),
@@ -43,9 +46,9 @@ class _OtpScreenState extends State<OtpScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Code is sent to 098765432',
-                  style: AppTStyleAndSize.appBarTStyle().copyWith(
+                ReuseableText(
+                text:   'Code is sent to 098765432',
+                  textStyle: AppTStyleAndSize.appBarTStyle().copyWith(
                     color: Color.fromRGBO(133, 133, 151, 100),
                   ),
                 ),
@@ -91,18 +94,18 @@ class _OtpScreenState extends State<OtpScreen> {
                                 child: Image.asset(AppAssetsImages.popUpImage),
                               ),
                               AppSize.widgetGap(height: 19),
-                              Text(
-                                'Success',
-                                style: AppTStyleAndSize.buttonTextStyle()
+                              ReuseableText(
+                              text:   'Success',
+                                textStyle: AppTStyleAndSize.buttonTextStyle()
                                     .copyWith(color: Colors.black),
                               ),
                               AppSize.widgetGap(height: 9),
                               SizedBox(
                                 width: 172.w,
                                 height: 36.h,
-                                child: Text(
-                                  'Congratulations, you have completed your registration!',
-                                  style:
+                                child: ReuseableText(
+                              text:     'Congratulations, you have completed your registration!',
+                                  textStyle:
                                       AppTStyleAndSize.fourthSmallTextStyle(),
                                 ),
                               ),
@@ -111,12 +114,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 width: 259,
                                 text: 'Done',
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => NavBar(),
-                                    ),
-                                  );
+                                  Navigator.pushNamed(context, AppRoutes.naveBar);
                                 },
                               ),
                             ],

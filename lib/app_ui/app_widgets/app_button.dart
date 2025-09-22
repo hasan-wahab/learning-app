@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 
@@ -34,7 +35,7 @@ class AppBtn extends StatelessWidget {
           color: AppColors.buttonColor,
         ),
         child: text != null
-            ? Text(text!, style: textStyle ?? AppTStyleAndSize.buttonTextStyle())
+            ? ReuseableText(text:text!, textStyle: textStyle ?? AppTStyleAndSize.buttonTextStyle())
             : icon,
       ),
     );

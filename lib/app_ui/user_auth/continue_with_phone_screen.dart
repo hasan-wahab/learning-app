@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_ui/app_widgets/app_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_field.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/app_ui/user_auth/otp_screen.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
+
+import '../../app_routes/app_routes.dart';
 
 class ContinueWithPhoneScreen extends StatelessWidget {
   const ContinueWithPhoneScreen({super.key});
@@ -27,9 +30,9 @@ class ContinueWithPhoneScreen extends StatelessWidget {
               children: [
                 Icon(Icons.remove_red_eye),
                 AppSize.widgetGap(width: 55.5),
-                Text(
-                  'Continue with phone',
-                  style: AppTStyleAndSize.appBarTStyle(),
+                ReuseableText(
+                 text:  'Continue with phone',
+                  textStyle: AppTStyleAndSize.appBarTStyle(),
                 ),
               ],
             ),
@@ -47,9 +50,9 @@ class ContinueWithPhoneScreen extends StatelessWidget {
               SizedBox(
                 height: 21.h,
                 width: 182.w,
-                child: Text(
-                  'Enter your phone number',
-                  style: AppTStyleAndSize.tFieldTextStyle(),
+                child: ReuseableText(
+               text:    'Enter your phone number',
+                  textStyle: AppTStyleAndSize.tFieldTextStyle(),
                 ),
               ),
             ],
@@ -64,10 +67,7 @@ class ContinueWithPhoneScreen extends StatelessWidget {
                 width: 124,
                 text: 'Continue',
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => OtpScreen()),
-                  );
+                  Navigator.pushNamed(context, AppRoutes.otpScreen);
                 },
               ),
             ),

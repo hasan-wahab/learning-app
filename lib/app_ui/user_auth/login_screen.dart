@@ -3,11 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_ui/app_widgets/app_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_field.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/app_ui/user_auth/continue_with_phone_screen.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
+
+import '../../app_routes/app_routes.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -20,20 +23,20 @@ class LoginScreen extends StatelessWidget {
         padding: AppSize.bodyPadding(horizontal: 24, vertical: 0),
         children: [
           AppSize.widgetGap(height: 86),
-          Text('Log In', style: AppTStyleAndSize.firstTextStyle()),
+          ReuseableText(text: 'Log In', textStyle: AppTStyleAndSize.firstTextStyle()),
           AppSize.widgetGap(height: 57),
-          Text(
-            'Your email',
-            style: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+          ReuseableText(
+          text:   'Your email',
+            textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
               fontSize: 14.sp,
             ),
           ),
           // Text Field
           AppTextField(hintText: 'Enter your email'),
           AppSize.widgetGap(height: 24),
-          Text(
-            'Your password',
-            style: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+          ReuseableText(
+          text:   'Your password',
+            textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
               fontSize: 14.sp,
             ),
           ),
@@ -45,9 +48,9 @@ class LoginScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                'Forget password ?',
-                style: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+              ReuseableText(
+               text:  'Forget password ?',
+                textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
                   fontSize: 14,
                 ),
               ),
@@ -59,12 +62,7 @@ class LoginScreen extends StatelessWidget {
             height: 50,
             text: 'Log In',
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ContinueWithPhoneScreen(),
-                ),
-              );
+              Navigator.pushNamed(context, AppRoutes.continueWithPhoneScreen);
             },
           ),
           AppSize.widgetGap(height: 26),
@@ -75,9 +73,9 @@ class LoginScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Don’t have an account? ',
-                  style: AppTStyleAndSize.fourthSmallTextStyle(),
+                ReuseableText(
+                 text:  'Don’t have an account? ',
+                  textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
                 ),
                 AppTextButton(onTap: () {}, text: 'Sign Up'),
               ],
@@ -92,9 +90,9 @@ class LoginScreen extends StatelessWidget {
                 color: AppColors.checkBoxBorderColor,
               ),
               AppSize.widgetGap(width: 22.73),
-              Text(
-                'OR login with',
-                style: AppTStyleAndSize.fourthSmallTextStyle(),
+              ReuseableText(
+                text: 'OR login with',
+                textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
               ),
               AppSize.widgetGap(width: 22.73),
               Container(

@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/app_ui/nave_bar/course_screen.dart';
 import 'package:foodi/app_ui/nave_bar/home_screen/home_screen.dart';
 import 'package:foodi/app_ui/nave_bar/message_screen.dart';
@@ -40,8 +42,11 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: screenList.elementAt(currentValue),
       bottomNavigationBar: SafeArea(
+        bottom: true,
+        top: false,
         child: SizedBox(
           height: 111.h,
           width: 375.w,
@@ -89,9 +94,9 @@ class _NavBarState extends State<NavBar> {
                                       : Icon(Icons.add, color: Colors.white),
                                 ),
                                 AppSize.widgetGap(height: 12.63.h),
-                                Text(
-                                  textList[index],
-                                  style: AppTStyleAndSize.naveBarTStyle()
+                                ReuseableText(
+                                text:   textList[index],
+                                  textStyle: AppTStyleAndSize.naveBarTStyle()
                                       .copyWith(
                                         color: currentValue == index
                                             ? AppColors.buttonColor

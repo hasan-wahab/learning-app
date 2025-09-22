@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodi/app_routes/app_routes.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boarding_secree2.dart';
 
 import 'package:foodi/common/app_style/app_colors.dart';
@@ -23,10 +24,7 @@ class OnBoadingScreen1 extends StatelessWidget {
             onBoadingImage(
               image: AppAssetsImages.firstImage,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OnBoardingSecreen2()),
-                );
+              Navigator.pushNamed(context, AppRoutes.secondOnboardingScreen);
               },
             ),
             AppSize.widgetGap(height: 38),

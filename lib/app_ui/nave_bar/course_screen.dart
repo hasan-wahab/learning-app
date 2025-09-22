@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 
 class CourseScreen extends StatelessWidget {
   const CourseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Center(child: Text('Course Screen')));
+    return Container(child: Center(child: ReuseableText(text:'Course Screen')));
   }
 }

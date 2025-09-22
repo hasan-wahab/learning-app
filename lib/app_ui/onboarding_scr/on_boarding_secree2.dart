@@ -5,6 +5,8 @@ import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/app_ui/onboarding_scr/onboarding_widgets.dart';
 import 'package:foodi/common/images/assets_images.dart';
 
+import '../../app_routes/app_routes.dart';
+
 class OnBoardingSecreen2 extends StatelessWidget {
   const OnBoardingSecreen2({super.key});
 
@@ -20,10 +22,7 @@ class OnBoardingSecreen2 extends StatelessWidget {
             onBoadingImage(
               image: AppAssetsImages.secondImage,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OnboardingScreen3()),
-                );
+                Navigator.pushNamed(context, AppRoutes.thirdOnboardingScreen);
               },
             ),
             AppSize.widgetGap(height: 38),

@@ -8,6 +8,8 @@ import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
 
+import '../../app_routes/app_routes.dart';
+
 class OnboardingScreen3 extends StatelessWidget {
   const OnboardingScreen3({super.key});
 
@@ -43,10 +45,7 @@ class OnboardingScreen3 extends StatelessWidget {
                     width: 160,
                     height: 50,
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUpScreen()),
-                      );
+                      Navigator.pushNamed(context, AppRoutes.signUpScreen);
                     },
                   ),
                   AppBtn(text: 'Sign In', width: 160, height: 50, onTap: () {}),

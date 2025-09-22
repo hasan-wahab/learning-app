@@ -3,10 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_ui/app_widgets/app_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_field.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/app_ui/user_auth/login_screen.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
+
+import '../../app_routes/app_routes.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -19,25 +22,25 @@ class SignUpScreen extends StatelessWidget {
         padding: AppSize.bodyPadding(horizontal: 24, vertical: 0),
         children: [
           AppSize.widgetGap(height: 86),
-          Text('Sign Up', style: AppTStyleAndSize.firstTextStyle()),
+          ReuseableText(text: 'SignUp', textStyle: AppTStyleAndSize.firstTextStyle()),
 
-          Text(
-            'Enter your details below & free sign up',
-            style: AppTStyleAndSize.fourthSmallTextStyle(),
+          ReuseableText(
+            text: 'Enter your details below & free sign up',
+            textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
           ),
           AppSize.widgetGap(height: 43),
-          Text(
-            'Your email',
-            style: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+          ReuseableText(
+           text:  'Your email',
+            textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
               fontSize: 14.sp,
             ),
           ),
           // Text Field
           AppTextField(hintText: 'Enter your email'),
           AppSize.widgetGap(height: 24),
-          Text(
-            'Your password',
-            style: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+          ReuseableText(
+            text: 'Your password',
+            textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
               fontSize: 14.sp,
             ),
           ),
@@ -66,9 +69,9 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(
                 width: 253.w,
                 height: 36.h,
-                child: Text(
-                  'By creating an account you have to agreewith our them & condication.',
-                  style: AppTStyleAndSize.fourthSmallTextStyle(),
+                child: ReuseableText(
+                 text:  'By creating an account you have to agreewith our them & condication.',
+                  textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
                 ),
               ),
             ],
@@ -80,12 +83,12 @@ class SignUpScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Already have an account？',
-                  style: AppTStyleAndSize.fourthSmallTextStyle(),
+                ReuseableText(
+                 text:  'Already have an account？',
+                  textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
                 ),
                 AppTextButton(onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                  Navigator.pushNamed(context, AppRoutes.loginScreen);
                 }, text: 'Log In'),
               ],
             ),

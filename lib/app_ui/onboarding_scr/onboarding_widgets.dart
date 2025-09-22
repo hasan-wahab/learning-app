@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
@@ -15,10 +16,10 @@ Widget onBoadingImage({required String image, VoidCallback? onTap}) =>
 Widget firstText({required String text}) => SizedBox(
   height: 66.h,
   width: 168.w,
-  child: Text(
+  child: ReuseableText(
     textAlign: TextAlign.center,
-    text,
-    style: AppTStyleAndSize.secondTextStyle(),
+    text:text,
+    textStyle: AppTStyleAndSize.secondTextStyle(),
   ),
 );
 // first widget
@@ -29,10 +30,10 @@ Widget secondText({
 }) => SizedBox(
   height: height.h,
   width: width.w,
-  child: Text(
+  child: ReuseableText(
     textAlign: TextAlign.center,
-    text,
-    style: AppTStyleAndSize.thirdTextStyle(),
+    text: text,
+    textStyle: AppTStyleAndSize.thirdTextStyle(),
   ),
 );
 
