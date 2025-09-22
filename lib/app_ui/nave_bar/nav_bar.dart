@@ -8,7 +8,7 @@ import 'package:foodi/app_ui/nave_bar/course_screen/course_screen.dart';
 import 'package:foodi/app_ui/nave_bar/home_screen/home_screen.dart';
 import 'package:foodi/app_ui/nave_bar/message_screen.dart';
 import 'package:foodi/app_ui/nave_bar/profile_screen.dart';
-import 'package:foodi/app_ui/nave_bar/search_screen.dart';
+import 'package:foodi/app_ui/nave_bar/search_screens/search_screen.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';

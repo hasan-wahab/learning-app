@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_routes/app_routes.dart';
 import 'package:foodi/app_ui/nave_bar/nav_bar.dart';
-import 'package:foodi/app_ui/nave_bar/search_screen.dart';
+import 'package:foodi/app_ui/nave_bar/search_screens/search_screen.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boading_screen1.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boarding_secree2.dart';
 

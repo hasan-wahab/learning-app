@@ -151,16 +151,16 @@ Widget secondRowTwoCards(){
     ),
   );
 }
-Widget categoryRow(){
+Widget categoryRow({required int catagoryLenght,double borderRadius=12}){
   return  Row(
-      children: List.generate((3), (index){
+      children: List.generate((catagoryLenght), (index){
         return Container(
           margin: AppSize.bodyPadding2(right: 17),
           height: 28.h,
           width: 73.w,
           decoration: BoxDecoration(
             color: AppColors.buttonColor,
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(borderRadius.r),
           ),
           child: Center(
             child: ReuseableText(

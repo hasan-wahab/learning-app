@@ -29,16 +29,16 @@ class CourseScreen extends StatelessWidget {
         ReuseableText(
           text: 'Choice your course',
           textStyle: AppTStyleAndSize.appBarTStyle(),
+          overflow: TextOverflow.fade,
         ),
         AppSize.widgetGap(height: 13, width: 0),
-        categoryRow(),
+        categoryRow(catagoryLenght: 3),
         AppSize.widgetGap(height: 24, width: 0),
         ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemCount: 4,
           padding: EdgeInsets.zero,
-
           itemBuilder: (context, index) {
             return courseCardList();
           },

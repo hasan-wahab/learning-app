@@ -7,7 +7,7 @@ import 'package:foodi/app_ui/nave_bar/home_screen/home_screen.dart';
 import 'package:foodi/app_ui/nave_bar/message_screen.dart';
 import 'package:foodi/app_ui/nave_bar/nav_bar.dart';
 import 'package:foodi/app_ui/nave_bar/profile_screen.dart';
-import 'package:foodi/app_ui/nave_bar/search_screen.dart';
+import 'package:foodi/app_ui/nave_bar/search_screens/search_screen.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boading_screen1.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boarding_secree2.dart';
 import 'package:foodi/app_ui/onboarding_scr/onboarding_screen3.dart';
