@@ -13,10 +13,14 @@ class AppAssetsImages {
   static final String meetUpImage='$imageBase/meetup.png';
   static final String courseImage1='$imageBase/courseimage1.png';
   static final String courseImage2='$imageBase/courseimage2.png';
+  static final String speakingImage='$imageBase/i8.png';
+  static final String play='$imageBase/play.png';
+
   // icon
   static final String search = '$imageBase/search.png';
   static final String person = '$imageBase/person.png';
   static final String massege = '$imageBase/message.png';
   static final String course = '$imageBase/course.png';
   static final String home = '$imageBase/home.png';
+  static final String star = '$imageBase/star.png';
 }

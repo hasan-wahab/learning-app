@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/app_routes/app_routes.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_field.dart';
 import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/common/app_style/app_size.dart';
@@ -56,7 +57,9 @@ class SearchScreen extends StatelessWidget {
             padding: EdgeInsets.zero,
             itemCount: 3,
             itemBuilder: (context,index) {
-              return courseCardList();
+              return courseCardList(onTap: (){
+           Navigator.pushNamed(context, AppRoutes.detailScreen);
+              });
             }
           ),
         ),

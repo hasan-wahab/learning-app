@@ -174,86 +174,89 @@ Widget categoryRow({required int catagoryLenght,double borderRadius=12}){
       })
   );
 }
-Widget courseCardList(){
- return SizedBox(
-    height: 100.h,
-    width: 335.w,
-    child: Card(
-      child: Padding(
-        padding:AppSize.bodyPadding(horizontal: 10,vertical: 10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
+Widget courseCardList({VoidCallback? onTap}){
+ return InkWell(
+   onTap: onTap,
+   child: SizedBox(
+      height: 100.h,
+      width: 335.w,
+      child: Card(
+        child: Padding(
+          padding:AppSize.bodyPadding(horizontal: 10,vertical: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
 
-              height: 68.h,
-              width: 68.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                color: Colors.green,
+                height: 68.h,
+                width: 68.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: Colors.green,
+                ),
               ),
-            ),
-            AppSize.widgetGap(width: 35,height: 0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 21.h,
-                  width: 136.w,
-                  child: ReuseableText(text: 'Product Design',overflow:TextOverflow.fade,textStyle: AppTStyleAndSize.secondTextStyle().copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  )),
-                ),
-                SizedBox(
-
-                  height:18.h ,
-                  width: 130.w,
-                  child: Row(
-                    spacing: AppSize.rowSpacing(width: 10),
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                      ReuseableText(text: 'Roberston Connnie',overflow:TextOverflow.fade,textStyle: AppTStyleAndSize.fourthSmallTextStyle(),),
-                    ],
+              AppSize.widgetGap(width: 35,height: 0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 21.h,
+                    width: 136.w,
+                    child: ReuseableText(text: 'Product Design',overflow:TextOverflow.fade,textStyle: AppTStyleAndSize.secondTextStyle().copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    )),
                   ),
-                ),
-                AppSize.widgetGap(height: 7),
-                SizedBox(
-                  height:24.h ,
-                  width: 101.w,
-                  child: Row(
-                    spacing: AppSize.rowSpacing(width: 6),
-                    children: [
-                      ReuseableText(text: '\$199',overflow:TextOverflow.fade,textStyle: AppTStyleAndSize.secondTextStyle().copyWith(
-                          fontSize: 16,
-                          color: AppColors.buttonColor,
-                          fontWeight: FontWeight.bold
-                      ),),
-                      Container(
-                        height: 16.h,
-                        width: 57.w,
-                        decoration: BoxDecoration(
-                          color: AppColors.courseRowColor1,
-                          borderRadius: BorderRadius.circular(16.r),
-                        ),
-                        child: Center(
-                          child: ReuseableText(text: '16 hours',overflow:TextOverflow.fade,textStyle: AppTStyleAndSize.secondTextStyle().copyWith(
-                              color: Colors.orange,
-                              fontSize: 10
-                          ),),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                  SizedBox(
 
-              ],
-            ),
-          ],
+                    height:18.h ,
+                    width: 130.w,
+                    child: Row(
+                      spacing: AppSize.rowSpacing(width: 10),
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+
+                        ReuseableText(text: 'Roberston Connnie',overflow:TextOverflow.fade,textStyle: AppTStyleAndSize.fourthSmallTextStyle(),),
+                      ],
+                    ),
+                  ),
+                  AppSize.widgetGap(height: 7),
+                  SizedBox(
+                    height:24.h ,
+                    width: 101.w,
+                    child: Row(
+                      spacing: AppSize.rowSpacing(width: 6),
+                      children: [
+                        ReuseableText(text: '\$199',overflow:TextOverflow.fade,textStyle: AppTStyleAndSize.secondTextStyle().copyWith(
+                            fontSize: 16,
+                            color: AppColors.buttonColor,
+                            fontWeight: FontWeight.bold
+                        ),),
+                        Container(
+                          height: 16.h,
+                          width: 57.w,
+                          decoration: BoxDecoration(
+                            color: AppColors.courseRowColor1,
+                            borderRadius: BorderRadius.circular(16.r),
+                          ),
+                          child: Center(
+                            child: ReuseableText(text: '16 hours',overflow:TextOverflow.fade,textStyle: AppTStyleAndSize.secondTextStyle().copyWith(
+                                color: Colors.orange,
+                                fontSize: 10
+                            ),),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     ),
-  );
+ );
 }

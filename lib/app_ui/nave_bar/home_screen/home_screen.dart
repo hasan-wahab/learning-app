@@ -20,10 +20,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   final angle1 = math.pi * 1.0;
   final angle2 = math.pi * 2.0;
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width);
+    print(MediaQuery.of(context).size.height);
     return ListView(
       padding: EdgeInsets.zero,
       // Starting column
@@ -51,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: Stack(
             children: [
-
               Padding(
                 padding: AppSize.bodyPadding2(top: 26.64,left: 21.42),
                 child: Align(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:foodi/app_routes/app_routes.dart';
 import 'package:foodi/app_ui/nave_bar/course_screen/course_screen.dart';
+import 'package:foodi/app_ui/datail_screen/detail_screen.dart';
 import 'package:foodi/app_ui/nave_bar/home_screen/home_screen.dart';
 import 'package:foodi/app_ui/nave_bar/message_screen.dart';
 import 'package:foodi/app_ui/nave_bar/nav_bar.dart';
@@ -15,6 +16,7 @@ import 'package:foodi/app_ui/user_auth/continue_with_phone_screen.dart';
 import 'package:foodi/app_ui/user_auth/login_screen.dart';
 import 'package:foodi/app_ui/user_auth/otp_screen.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen.dart';
+import 'package:foodi/app_ui/video_player/video_player_screen.dart';
 
 class AppRouting {
   final String? routeName;
@@ -48,6 +50,8 @@ class AppRouting {
     AppRouting(routeName: AppRoutes.searchScreen, route: SearchScreen()),
     AppRouting(routeName: AppRoutes.messageScreen, route: MessageScreen()),
     AppRouting(routeName: AppRoutes.profileScreen, route: ProfileScreen()),
+    AppRouting(routeName: AppRoutes.detailScreen, route: DetailScreen()),
+    AppRouting(routeName: AppRoutes.videoPlayerScreen, route: VideoPlayerScreen()),
   ];
 
   static MaterialPageRoute onGenerateRoute(

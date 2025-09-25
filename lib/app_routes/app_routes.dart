@@ -1,7 +1,5 @@
 class AppRoutes{
-
   AppRoutes._();
-
  static final String firstOnboardingScreen='/';
  static final String secondOnboardingScreen='secondOnboardingScreen';
  static final String thirdOnboardingScreen='thirdOnboardingScreen';
@@ -16,4 +14,6 @@ class AppRoutes{
  static final String searchScreen='searchScreen';
  static final String messageScreen='messageScreen';
  static final String profileScreen='profileScreen';
+ static final String detailScreen='detailScreen';
+ static final String videoPlayerScreen='videoPlayerScreen';
 }
