@@ -60,29 +60,32 @@ class DetailScreen extends StatelessWidget {
               ],
             ),
           ),
-        detailContainer()
+          detailContainer(),
         ],
       ),
 
       bottomSheet: Container(
-        padding: AppSize.bodyPadding2(right: 16,left: 20),
-        height: 98.h,color: Colors.amber,
+        padding: AppSize.bodyPadding2(right: 16, left: 20),
+        height: 98.h,
         child: Row(
           children: [
             Container(
-
               height: 50.h,
               width: 89.w,
               decoration: BoxDecoration(
                 color: AppColors.courseRowColor2,
-borderRadius: BorderRadius.circular(12.r)
+                borderRadius: BorderRadius.circular(12.r),
               ),
-              child:   Image.asset(AppAssetsImages.star),
+              child: Image.asset(AppAssetsImages.star),
             ),
-            AppSize.widgetGap(width: 14,height: 0),
-            AppBtn(width: 236,text: 'Buy Now',onTap: (){
-              Navigator.pushNamed(context, AppRoutes.videoPlayerScreen);
-            },),
+            AppSize.widgetGap(width: 14, height: 0),
+            AppBtn(
+              width: 236,
+              text: 'Buy Now',
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.videoPlayerScreen);
+              },
+            ),
           ],
         ),
       ),

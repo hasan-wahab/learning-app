@@ -12,6 +12,7 @@ import 'package:foodi/app_ui/nave_bar/search_screens/search_screen.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boading_screen1.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boarding_secree2.dart';
 import 'package:foodi/app_ui/onboarding_scr/onboarding_screen3.dart';
+import 'package:foodi/app_ui/payment_method/card_list/card_list.dart';
 import 'package:foodi/app_ui/user_auth/continue_with_phone_screen.dart';
 import 'package:foodi/app_ui/user_auth/login_screen.dart';
 import 'package:foodi/app_ui/user_auth/otp_screen.dart';
@@ -52,6 +53,7 @@ class AppRouting {
     AppRouting(routeName: AppRoutes.profileScreen, route: ProfileScreen()),
     AppRouting(routeName: AppRoutes.detailScreen, route: DetailScreen()),
     AppRouting(routeName: AppRoutes.videoPlayerScreen, route: VideoPlayerScreen()),
+    AppRouting(routeName: AppRoutes.paymentCardList, route: CardList()),
   ];
 
   static MaterialPageRoute onGenerateRoute(

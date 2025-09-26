@@ -15,6 +15,8 @@ class AppAssetsImages {
   static final String courseImage2='$imageBase/courseimage2.png';
   static final String speakingImage='$imageBase/i8.png';
   static final String play='$imageBase/play.png';
+  static final String pauseButtonImage='$imageBase/pause.png';
+  static final String easyPaisaLogoNetworkImage='https://freesvg.org/img/1612850349easypaisa.png';
 
   // icon
   static final String search = '$imageBase/search.png';
@@ -23,4 +25,5 @@ class AppAssetsImages {
   static final String course = '$imageBase/course.png';
   static final String home = '$imageBase/home.png';
   static final String star = '$imageBase/star.png';
+  static final String videoFullScreenIcon = '$imageBase/video_full_screen_icon.png';
 }
