@@ -9,8 +9,14 @@ import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key});
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +89,7 @@ class DetailScreen extends StatelessWidget {
               width: 236,
               text: 'Buy Now',
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.videoPlayerScreen);
+                Navigator.pushNamed(context, AppRoutes.paymentCardList);
               },
             ),
           ],

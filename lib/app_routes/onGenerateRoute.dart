@@ -12,7 +12,8 @@ import 'package:foodi/app_ui/nave_bar/search_screens/search_screen.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boading_screen1.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boarding_secree2.dart';
 import 'package:foodi/app_ui/onboarding_scr/onboarding_screen3.dart';
-import 'package:foodi/app_ui/payment_method/card_list/card_list.dart';
+import 'package:foodi/app_ui/payment_method/card_list/detail_screen/card_detail_screen.dart';
+import 'package:foodi/app_ui/payment_method/card_list/card_list_screen/card_list.dart';
 import 'package:foodi/app_ui/user_auth/continue_with_phone_screen.dart';
 import 'package:foodi/app_ui/user_auth/login_screen.dart';
 import 'package:foodi/app_ui/user_auth/otp_screen.dart';
@@ -54,9 +55,10 @@ class AppRouting {
     AppRouting(routeName: AppRoutes.detailScreen, route: DetailScreen()),
     AppRouting(routeName: AppRoutes.videoPlayerScreen, route: VideoPlayerScreen()),
     AppRouting(routeName: AppRoutes.paymentCardList, route: CardList()),
+    AppRouting(routeName: AppRoutes.cardDetailScreen, route: CardDetailScreen()),
   ];
 
-  static MaterialPageRoute onGenerateRoute(
+  static CupertinoPageRoute onGenerateRoute(
     RouteSettings settings,
     BuildContext context,
   ) {
@@ -65,15 +67,15 @@ class AppRouting {
           .where((test) => test.routeName == settings.name)
           .toList();
       if (result.isNotEmpty) {
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => result.first.route,
           settings: settings,
         );
       }
 
-      return MaterialPageRoute(builder: (_) => OnBoadingScreen1());
+      return CupertinoPageRoute(builder: (_) => OnBoadingScreen1());
     } else {
-      return MaterialPageRoute(builder: (_) => OnBoadingScreen1());
+      return CupertinoPageRoute(builder: (_) => OnBoadingScreen1());
     }
   }
 }

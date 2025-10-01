@@ -10,7 +10,7 @@ import 'package:foodi/common/images/assets_images.dart';
 
 import '../../app_widgets/app_button.dart';
 
-Widget firstBlueContainer() {
+Widget firstBlueContainer({required bool showAppBar}) {
   return Container(
     color: AppColors.buttonColor,
     height: 183.h,
@@ -18,64 +18,64 @@ Widget firstBlueContainer() {
     padding: AppSize.bodyPadding(horizontal: 20, vertical: 0),
     child: Column(
       children: [
-        AppSize.widgetGap(height: 61, width: 0),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // First title and sub title
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 36.h,
-                  width: 118.w,
-                  child: ReuseableText(
-                    text: 'Hi,Hasan',
-                    textStyle: AppTStyleAndSize.firstTextStyle().copyWith(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 21.h,
-                  width: 128.w,
-                  child: ReuseableText(
-                    text: 'Let’s start learning',
-                    textStyle: AppTStyleAndSize.tFieldTextStyle().copyWith(
-                      color: Color.fromRGBO(255, 255, 255, 100),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+        AppSize.widgetGap(height:showAppBar!=true? 61:0, width: 0),
+       showAppBar==true? Container():Row(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+         children: [
+           // First title and sub title
+           Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+             children: [
+               SizedBox(
+                 height: 36.h,
+                 width: 118.w,
+                 child: ReuseableText(
+                   text: 'Hi,Hasan',
+                   textStyle: AppTStyleAndSize.firstTextStyle().copyWith(
+                     color: Colors.white,
+                     fontSize: 24,
+                   ),
+                 ),
+               ),
+               SizedBox(
+                 height: 21.h,
+                 width: 128.w,
+                 child: ReuseableText(
+                   text: 'Let’s start learning',
+                   textStyle: AppTStyleAndSize.tFieldTextStyle().copyWith(
+                     color: Color.fromRGBO(255, 255, 255, 100),
+                   ),
+                 ),
+               ),
+             ],
+           ),
 
-            // Circle avatar
-            SizedBox(
-              height: 49.98.h,
-              width: 36.w,
-              child: Stack(
-                children: [
-                  Container(
-                    height: 36.h,
-                    width: 36.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.courseCardColor1,
-                    ),
-                  ),
+           // Circle avatar
+           SizedBox(
+             height: 49.98.h,
+             width: 36.w,
+             child: Stack(
+               children: [
+                 Container(
+                   height: 36.h,
+                   width: 36.w,
+                   decoration: BoxDecoration(
+                     shape: BoxShape.circle,
+                     color: AppColors.courseCardColor1,
+                   ),
+                 ),
 
-                  SizedBox(
-                    height: 40.h,
-                    width: 36.w,
-                    child: Image.asset(AppAssetsImages.avatar),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+                 SizedBox(
+                   height: 40.h,
+                   width: 36.w,
+                   child: Image.asset(AppAssetsImages.avatar),
+                 ),
+               ],
+             ),
+           ),
+         ],
+       ),
       ],
     ),
   );
@@ -340,3 +340,95 @@ Widget learningPlanWidget({required angle1, required angle2}) {
     ),
   );
 }
+
+ Widget meetUpCard(){
+  return  Container(
+    margin: AppSize.bodyPadding(horizontal: 20, vertical: 0),
+    height: 120.h,
+    width: 335.w,
+    decoration: BoxDecoration(
+      color: AppColors.meetUpCardColor,
+      borderRadius: BorderRadius.circular(12.r),
+    ),
+    child: Stack(
+      children: [
+        Padding(
+          padding: AppSize.bodyPadding2(top: 26.64,left: 21.42),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: ReuseableText(
+              text: 'Meetup',
+              textStyle: AppTStyleAndSize.firstTextStyle().copyWith(
+                color: AppColors.meetUpTextColor,
+                fontSize: 24.36,
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: AppSize.bodyPadding2(left: 21.74),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: ReuseableText(
+              text: 'Off-line exchange of learning experiences',
+              textStyle: AppTStyleAndSize.firstTextStyle().copyWith(
+                color: AppColors.meetUpTextColor,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: AppSize.bodyPadding2(right: 13.80),
+          child: Align(
+
+            alignment: Alignment.topRight,
+            child: Container(
+
+              decoration: BoxDecoration(
+                  color: Colors.white24,
+                  shape: BoxShape.circle
+              ),
+
+              height: 100.0.h,
+              width: 100.0.w,
+              child: Stack(
+
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      height: 50.h,
+                      width: 40.w,
+
+                      child: Image.asset(AppAssetsImages.avatar),),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 40.h,
+                          width: 40.w,
+
+                          child: Image.asset(AppAssetsImages.secondRowImage),
+                        ),
+                        SizedBox(
+                          height: 40.h,
+                          width: 40.w,
+
+                          child: Image.asset(AppAssetsImages.meetUpImage),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+ }

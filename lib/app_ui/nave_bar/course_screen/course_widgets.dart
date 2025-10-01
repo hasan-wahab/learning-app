@@ -15,28 +15,29 @@ Widget firstRowTitleAndAvatar(){
       ReuseableText(
         text: 'Course',
         textStyle: AppTStyleAndSize.firstTextStyle(),
-      ),        SizedBox(
-        height: 49.98.h,
-        width: 36.w,
-        child: Stack(
-          children: [
-            Container(
-              height: 36.h,
-              width: 36.w,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color:Color.fromRGBO(255, 235, 240, 100),
-              ),
-            ),
-
-            SizedBox(
-              height: 40.h,
-              width: 36.w,
-              child: Image.asset(AppAssetsImages.avatar),
-            ),
-          ],
-        ),
       ),
+      // SizedBox(
+      //   height: 49.98.h,
+      //   width: 36.w,
+      //   child: Stack(
+      //     children: [
+      //       Container(
+      //         height: 36.h,
+      //         width: 36.w,
+      //         decoration: BoxDecoration(
+      //           shape: BoxShape.circle,
+      //           color:Color.fromRGBO(255, 235, 240, 100),
+      //         ),
+      //       ),
+      //
+      //       SizedBox(
+      //         height: 40.h,
+      //         width: 36.w,
+      //         child: Image.asset(AppAssetsImages.avatar),
+      //       ),
+      //     ],
+      //   ),
+      // ),
 
     ],
   );

@@ -11,6 +11,8 @@ class AppBtn extends StatelessWidget {
   final double height;
   final double? width;
   final TextStyle? textStyle;
+  final double borderRadius;
+  final bool isColor;
 
   const AppBtn({
     super.key,
@@ -20,6 +22,8 @@ class AppBtn extends StatelessWidget {
     this.width,
     this.icon,
     this.textStyle,
+    this.borderRadius = 12,
+    this.isColor = true,
   });
 
   @override
@@ -31,11 +35,20 @@ class AppBtn extends StatelessWidget {
         width: width!.w,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.sp),
-          color: AppColors.buttonColor,
+          borderRadius: BorderRadius.circular(borderRadius.r),
+          color: isColor ? AppColors.buttonColor : Colors.white,
+          border: isColor?null:Border.all(color: AppColors.buttonColor)
         ),
         child: text != null
-            ? ReuseableText(text:text!, textStyle: textStyle ?? AppTStyleAndSize.buttonTextStyle())
+            ? ReuseableText(
+                text: text!,
+                textStyle: isColor
+                    ? textStyle ?? AppTStyleAndSize.buttonTextStyle()
+                    : textStyle ??
+                          AppTStyleAndSize.buttonTextStyle().copyWith(
+                            color: AppColors.buttonColor,
+                          ),
+              )
             : icon,
       ),
     );

@@ -7,8 +7,14 @@ import 'package:foodi/common/images/assets_images.dart';
 
 import '../../app_routes/app_routes.dart';
 
-class OnBoardingSecreen2 extends StatelessWidget {
+class OnBoardingSecreen2 extends StatefulWidget {
   const OnBoardingSecreen2({super.key});
+
+  @override
+  State<OnBoardingSecreen2> createState() => _OnBoardingSecreen2State();
+}
+
+class _OnBoardingSecreen2State extends State<OnBoardingSecreen2> {
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,7 @@ class OnBoardingSecreen2 extends StatelessWidget {
             onBoadingImage(
               image: AppAssetsImages.secondImage,
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.thirdOnboardingScreen);
+
               },
             ),
             AppSize.widgetGap(height: 38),
@@ -35,8 +41,12 @@ class OnBoardingSecreen2 extends StatelessWidget {
                   'Easy and fast learning at any time to help you improve various skills',
             ),
             AppSize.widgetGap(height: 26),
-            threeDots(),
-            AppSize.widgetGap(height: 215),
+            threeDots(currentValue: 1),
+            AppSize.widgetGap(height: 44, width: 0),
+            // AppSize.widgetGap(height: 215),
+            circleButton(context: context,onTap: (){
+              Navigator.pushReplacementNamed(context, AppRoutes.thirdOnboardingScreen);
+            }),
           ],
         ),
       ),

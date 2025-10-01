@@ -33,7 +33,7 @@ class OnboardingScreen3 extends StatelessWidget {
             ),
             AppSize.widgetGap(height: 26),
 
-            threeDots(),
+            threeDots(currentValue: 2),
             AppSize.widgetGap(height: 81.75),
             SizedBox(
               child: Row(
@@ -45,10 +45,14 @@ class OnboardingScreen3 extends StatelessWidget {
                     width: 160,
                     height: 50,
                     onTap: () {
-                      Navigator.pushNamed(context, AppRoutes.signUpScreen);
+                      Navigator.pushReplacementNamed(context, AppRoutes.signUpScreen);
                     },
                   ),
-                  AppBtn(text: 'Sign In', width: 160, height: 50, onTap: () {}),
+                  AppBtn(
+                      isColor: false,
+                      text: 'Log In', width: 160, height: 50, onTap: () {
+                    Navigator.pushReplacementNamed(context, AppRoutes.loginScreen);
+                  }),
                 ],
               ),
             ),

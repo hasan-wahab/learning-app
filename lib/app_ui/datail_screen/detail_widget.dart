@@ -12,6 +12,7 @@ Widget detailContainer(){
   return   Align(
     alignment: Alignment.bottomCenter,
     child: Container(
+
       padding: AppSize.bodyPadding(horizontal: 20, vertical: 0),
       height: 536.h,
       width: 375.w,

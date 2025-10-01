@@ -17,6 +17,8 @@ class AppAssetsImages {
   static final String play='$imageBase/play.png';
   static final String pauseButtonImage='$imageBase/pause.png';
   static final String easyPaisaLogoNetworkImage='https://freesvg.org/img/1612850349easypaisa.png';
+  static final String masterCardImage='$imageBase/mastercard.png';
+  static final String chip='$imageBase/chip.png';
 
   // icon
   static final String search = '$imageBase/search.png';

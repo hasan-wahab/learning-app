@@ -28,8 +28,8 @@ Widget paymentCardList({required int index,required int currentIndex,VoidCallbac
                     borderRadius: BorderRadius.circular(12.r),
                     color: Colors.grey,
                     image: DecorationImage(
-                      image: NetworkImage(
-                        AppAssetsImages.easyPaisaLogoNetworkImage,
+                      image: AssetImage(
+                        AppAssetsImages.masterCardImage,
                       ),
                     ),
                   ),
@@ -40,7 +40,7 @@ Widget paymentCardList({required int index,required int currentIndex,VoidCallbac
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ReuseableText(
-                      text: 'Easy paisa',
+                      text: 'Master card',
                       textStyle: AppTStyleAndSize.secondTextStyle().copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

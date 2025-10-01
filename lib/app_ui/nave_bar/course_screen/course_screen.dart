@@ -7,9 +7,14 @@ import 'package:foodi/common/app_style/text_style.dart';
 
 import 'course_widgets.dart';
 
-class CourseScreen extends StatelessWidget {
+class CourseScreen extends StatefulWidget {
   const CourseScreen({super.key});
 
+  @override
+  State<CourseScreen> createState() => _CourseScreenState();
+}
+
+class _CourseScreenState extends State<CourseScreen> {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -17,6 +22,7 @@ class CourseScreen extends StatelessWidget {
       children: [
         AppSize.widgetGap(height: 61, width: 0),
         firstRowTitleAndAvatar(),
+        AppSize.widgetGap(height: 15,width: 0),
         AppTextField(
           height: 48,
           width: 335,

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
-import 'package:foodi/app_ui/payment_method/card_list/card_list_widget.dart';
+import 'package:foodi/app_ui/payment_method/card_list/card_list_screen/card_list_widget.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
-
-import '../../../app_routes/app_routes.dart';
-import '../../../common/images/assets_images.dart';
-import '../../app_widgets/app_button.dart';
+import '../../../../app_routes/app_routes.dart';
+import '../../../app_widgets/app_button.dart';
 
 class CardList extends StatefulWidget {
   const CardList({super.key});
@@ -100,7 +98,7 @@ class _CardListState extends State<CardList> {
               width: 327,
               text: 'Continue',
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.videoPlayerScreen);
+                Navigator.pushNamed(context, AppRoutes.cardDetailScreen);
               },
             ),
           ],

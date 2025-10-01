@@ -17,4 +17,5 @@ class AppRoutes{
  static final String detailScreen='detailScreen';
  static final String videoPlayerScreen='videoPlayerScreen';
  static final String paymentCardList='paymentCardList';
+ static final String cardDetailScreen='cardDetailScreen';
 }

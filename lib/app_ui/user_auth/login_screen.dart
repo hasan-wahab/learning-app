@@ -12,21 +12,59 @@ import 'package:foodi/common/images/assets_images.dart';
 
 import '../../app_routes/app_routes.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  ScrollController scrollController = ScrollController();
+  bool showAppBar = false;
+
+  @override
+  void initState() {
+    scrollController.addListener(() {
+      if (scrollController.position.pixels > 38) {
+        setState(() {
+          showAppBar = true;
+        });
+      } else {
+        setState(() {
+          showAppBar = false;
+        });
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: showAppBar ? AppBar(
+        toolbarHeight: 66.h,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.white,
+
+        title: ReuseableText(
+          text: 'Log In',
+          textStyle: AppTStyleAndSize.secondTextStyle(),
+        ),
+      ) : null,
       backgroundColor: AppColors.backgroundColor,
       body: ListView(
+        controller: scrollController,
         padding: AppSize.bodyPadding(horizontal: 24, vertical: 0),
         children: [
-          AppSize.widgetGap(height: 86),
-          ReuseableText(text: 'Log In', textStyle: AppTStyleAndSize.firstTextStyle()),
+          AppSize.widgetGap(height:showAppBar!=true? 86:0),
+         showAppBar!=true? ReuseableText(
+            text: 'Log In',
+            textStyle: AppTStyleAndSize.firstTextStyle(),
+          ):Container(),
           AppSize.widgetGap(height: 57),
           ReuseableText(
-          text:   'Your email',
+            text: 'Your email',
             textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
               fontSize: 14.sp,
             ),
@@ -35,7 +73,7 @@ class LoginScreen extends StatelessWidget {
           AppTextField(hintText: 'Enter your email'),
           AppSize.widgetGap(height: 24),
           ReuseableText(
-          text:   'Your password',
+            text: 'Your password',
             textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
               fontSize: 14.sp,
             ),
@@ -49,7 +87,7 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ReuseableText(
-               text:  'Forget password ?',
+                text: 'Forget password ?',
                 textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
                   fontSize: 14,
                 ),
@@ -62,7 +100,7 @@ class LoginScreen extends StatelessWidget {
             height: 50,
             text: 'Log In',
             onTap: () {
-              Navigator.pushNamed(context, AppRoutes.continueWithPhoneScreen);
+              Navigator.pushReplacementNamed(context, AppRoutes.naveBar);
             },
           ),
           AppSize.widgetGap(height: 26),
@@ -74,10 +112,15 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ReuseableText(
-                 text:  'Don’t have an account? ',
+                  text: 'Don’t have an account? ',
                   textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
                 ),
-                AppTextButton(onTap: () {}, text: 'Sign Up'),
+                AppTextButton(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.signUpScreen);
+                  },
+                  text: 'Sign Up',
+                ),
               ],
             ),
           ),

@@ -7,6 +7,9 @@ import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 
+import '../../app_routes/app_routes.dart';
+import '../app_widgets/app_button.dart';
+
 Widget onBoadingImage({required String image, VoidCallback? onTap}) =>
     InkWell(
       onTap: onTap,
@@ -39,35 +42,53 @@ Widget secondText({
 
 // Three dots Widget
 
-Widget threeDots() {
+Widget threeDots({required int currentValue}) {
   return Row(
     spacing: AppSize.rowSpacing(width: 10),
     mainAxisSize: MainAxisSize.min,
-    children: [
-      Container(
+    children: List.generate((3), (index){
+      return Container(
         height: 5.h,
-        width: 28.h,
+        width:currentValue==index? 28.h:9,
         decoration: BoxDecoration(
-          color: AppColors.buttonColor,
+          color: currentValue==index?AppColors.buttonColor:AppColors.courseCardColor1,
           borderRadius: BorderRadius.circular(5.w),
         ),
+      );
+    }),
+  );
+}
+
+Widget circleButton({required BuildContext context,VoidCallback? onTap}){
+  return   InkWell(
+    onTap: onTap,
+    child: Container(
+      height: 70.h,
+      width: 70.w,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppColors.buttonColor,
       ),
-      Container(
-        height: 5.h,
-        width: 9.h,
-        decoration: BoxDecoration(
-          color: AppColors.courseCardColor1,
-          borderRadius: BorderRadius.circular(5.w),
-        ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            height: 60.h,
+            width: 60.w,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+          ),
+          AppBtn(
+
+            width: 55,
+            height: 55,
+            borderRadius: 30,
+            icon: Icon(Icons.arrow_forward, color: Colors.white),
+          ),
+        ],
       ),
-      Container(
-        height: 5.h,
-        width: 9.h,
-        decoration: BoxDecoration(
-          color: AppColors.courseCardColor1,
-          borderRadius: BorderRadius.circular(5.w),
-        ),
-      ),
-    ],
+    ),
   );
 }
