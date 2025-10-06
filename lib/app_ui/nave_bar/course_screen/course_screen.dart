@@ -8,21 +8,27 @@ import 'package:foodi/common/app_style/text_style.dart';
 import 'course_widgets.dart';
 
 class CourseScreen extends StatefulWidget {
-  const CourseScreen({super.key});
+
+  ScrollController? controller = ScrollController();
+
+  CourseScreen({super.key,  this.controller});
 
   @override
   State<CourseScreen> createState() => _CourseScreenState();
 }
 
 class _CourseScreenState extends State<CourseScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     return ListView(
+      controller: widget.controller,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0.h),
       children: [
-        AppSize.widgetGap(height: 61, width: 0),
+        AppSize.widgetGap(height: 61,  width: 0),
         firstRowTitleAndAvatar(),
-        AppSize.widgetGap(height: 15,width: 0),
+        AppSize.widgetGap(height: 15, width: 0),
         AppTextField(
           height: 48,
           width: 335,

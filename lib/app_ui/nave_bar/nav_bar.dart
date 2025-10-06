@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/app_ui/app_widgets/app_app_bar.dart';
 import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/app_ui/nave_bar/course_screen/course_screen.dart';
 import 'package:foodi/app_ui/nave_bar/home_screen/home_screen.dart';
@@ -22,27 +23,7 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  @override
-  void initState() {
-    scrollController.addListener(() {
-      if (scrollController.position.pixels > 38) {
-        setState(() {
-          showAppBar = true;
-        });
-      } else {
-        setState(() {
-          showAppBar = false;
-        });
-      }
-    });
-
-    super.initState();
-  }
-
-  ScrollController scrollController = ScrollController();
   int currentValue = 0;
-  bool showAppBar = false;
-
   List iconList = [
     Icons.home,
     Icons.filter_1_rounded,
@@ -52,25 +33,37 @@ class _NavBarState extends State<NavBar> {
   ];
   List<String> textList = ['Home', 'Course', 'Search', 'Message', 'Profile'];
   late List<Widget> screenList = [
-    HomeScreen(scrollController: scrollController,showAppBar: showAppBar,),
-    CourseScreen(),
+    HomeScreen(controller: controllerList[currentValue]),
+    CourseScreen(controller: controllerList[currentValue]),
     SearchScreen(),
     MessageScreen(),
     ProfileScreen(),
   ];
+  List<ScrollController> controllerList = List.generate(5, (index) {
+    return ScrollController();
+  });
+
+  List<bool> showAppBar = [false, false, false, false, false];
+  @override
+  void initState() {
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final controller = controllerList[currentValue];
+
+    controller.addListener(() {
+      if (controller.position.pixels > 38.0) {
+        setState(() {
+          showAppBar[currentValue]=true;
+        });
+      }
+
+    });
     return Scaffold(
-      appBar: showAppBar == true ? AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 66.h,
-        backgroundColor: Colors.white,
-        title: ReuseableText(
-          text: 'Hi,Hasan',
-          textStyle: AppTStyleAndSize.secondTextStyle()
-        ),
-      ) : null,
+      appBar: showAppBar[currentValue] == true ? AppBar() : null,
       body: screenList.elementAt(currentValue),
       bottomNavigationBar: SizedBox(
         height: 111.h,

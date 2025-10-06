@@ -10,7 +10,7 @@ import 'package:foodi/common/images/assets_images.dart';
 
 import '../../app_widgets/app_button.dart';
 
-Widget firstBlueContainer({required bool showAppBar}) {
+Widget firstBlueContainer() {
   return Container(
     color: AppColors.buttonColor,
     height: 183.h,
@@ -18,8 +18,8 @@ Widget firstBlueContainer({required bool showAppBar}) {
     padding: AppSize.bodyPadding(horizontal: 20, vertical: 0),
     child: Column(
       children: [
-        AppSize.widgetGap(height:showAppBar!=true? 61:0, width: 0),
-       showAppBar==true? Container():Row(
+        AppSize.widgetGap(height:61, width: 0),
+       Row(
          crossAxisAlignment: CrossAxisAlignment.start,
          mainAxisAlignment: MainAxisAlignment.spaceBetween,
          children: [
