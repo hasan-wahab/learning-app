@@ -7,8 +7,8 @@ import '../../../common/app_style/text_style.dart';
 import '../../../common/images/assets_images.dart';
 import '../../app_widgets/reuseable_text.dart';
 
-Widget firstRowTitleAndAvatar(){
-  return Row(
+Widget firstRowTitleAndAvatar({bool showAppBar=false}){
+  return showAppBar!=true?Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -16,31 +16,10 @@ Widget firstRowTitleAndAvatar(){
         text: 'Course',
         textStyle: AppTStyleAndSize.firstTextStyle(),
       ),
-      // SizedBox(
-      //   height: 49.98.h,
-      //   width: 36.w,
-      //   child: Stack(
-      //     children: [
-      //       Container(
-      //         height: 36.h,
-      //         width: 36.w,
-      //         decoration: BoxDecoration(
-      //           shape: BoxShape.circle,
-      //           color:Color.fromRGBO(255, 235, 240, 100),
-      //         ),
-      //       ),
-      //
-      //       SizedBox(
-      //         height: 40.h,
-      //         width: 36.w,
-      //         child: Image.asset(AppAssetsImages.avatar),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+
 
     ],
-  );
+  ):Container();
 }
 
 Widget secondRowTwoCards(){

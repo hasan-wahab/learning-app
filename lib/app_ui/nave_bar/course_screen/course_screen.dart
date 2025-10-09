@@ -7,27 +7,21 @@ import 'package:foodi/common/app_style/text_style.dart';
 
 import 'course_widgets.dart';
 
-class CourseScreen extends StatefulWidget {
+class CourseScreen extends StatelessWidget {
 
   ScrollController? controller = ScrollController();
+  bool showAppBar;
 
-  CourseScreen({super.key,  this.controller});
-
-  @override
-  State<CourseScreen> createState() => _CourseScreenState();
-}
-
-class _CourseScreenState extends State<CourseScreen> {
-
+  CourseScreen({super.key,  this.controller,this.showAppBar=false});
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      controller: widget.controller,
+      controller: controller,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0.h),
       children: [
         AppSize.widgetGap(height: 61,  width: 0),
-        firstRowTitleAndAvatar(),
+        firstRowTitleAndAvatar(showAppBar:showAppBar ),
         AppSize.widgetGap(height: 15, width: 0),
         AppTextField(
           height: 48,

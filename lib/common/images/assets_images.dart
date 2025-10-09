@@ -19,6 +19,7 @@ class AppAssetsImages {
   static final String easyPaisaLogoNetworkImage='https://freesvg.org/img/1612850349easypaisa.png';
   static final String masterCardImage='$imageBase/mastercard.png';
   static final String chip='$imageBase/chip.png';
+  static final String successIcon='$imageBase/purchase.png';
 
   // icon
   static final String search = '$imageBase/search.png';
@@ -28,4 +29,5 @@ class AppAssetsImages {
   static final String home = '$imageBase/home.png';
   static final String star = '$imageBase/star.png';
   static final String videoFullScreenIcon = '$imageBase/video_full_screen_icon.png';
+  static final String message2 = '$imageBase/message_2.png';
 }

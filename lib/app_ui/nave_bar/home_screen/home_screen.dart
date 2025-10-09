@@ -3,59 +3,38 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 
 import 'package:foodi/app_ui/nave_bar/home_screen/home_screen_widgets.dart';
 
 import 'package:foodi/common/app_style/app_size.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   ScrollController? controller = ScrollController();
-  HomeScreen({super.key, this.controller});
+  bool showAppBar;
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  bool showAppBar=false;
-
-  // @override
-  // void initState() {
-  //   final controller=widget.controller;
-  //   controller!.addListener((){
-  //     if(controller.position.pixels>38){
-  //       // show appBar
-  //       setState(() {
-  //         showAppBar=true;
-  //       });
-  //     }else{
-  //       // don't show appBar
-  //       setState(() {
-  //         showAppBar=false;
-  //       });
-  //     }
-  //   });
-  //   super.initState();
-  // }
+  HomeScreen({super.key, this.controller, this.showAppBar = false});
 
   final angle1 = math.pi * 1.0;
+
   final angle2 = math.pi * 2.0;
+
   @override
   Widget build(BuildContext context) {
     return ListView(
-      controller: widget.controller,
+      controller: controller,
       padding: EdgeInsets.zero,
       // Starting column
       children: [
-      //  First part
+        //  First part
         SizedBox(
-          height: 223.h,
+          height: showAppBar != true ? 223.h : 180.h,
           width: 375.w,
-          child: Stack(children: [
-            showAppBar==true?Container():firstBlueContainer(),
-            timerWidget(),
-          ]),
+          child: Stack(
+            children: [
+              firstBlueContainer(showAppBar: showAppBar),
+              timerWidget(firstRowLastText: 'My courses'),
+            ],
+          ),
         ),
         // Second part -- row
         AppSize.widgetGap(height: 14.h, width: 0),

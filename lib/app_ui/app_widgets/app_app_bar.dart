@@ -13,13 +13,14 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? actionWidget;
   bool profileImage;
 
-   AppAppBar({super.key, required this.title, this.actionWidget,this.profileImage=true});
+   AppAppBar({super.key,this.title='', this.actionWidget,this.profileImage=true});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        padding: AppSize.bodyPadding2(left: 20, right: 20),
+    return Container(
+      color: AppColors.buttonColor,
+      padding: AppSize.bodyPadding2(left: 20, right: 20),
+      child: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -29,6 +30,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ReuseableText(
                   text: title,
                   textStyle: AppTStyleAndSize.firstTextStyle().copyWith(
+                    color: Colors.white,
                     fontSize: 24,
                   ),
                 ),

@@ -18,4 +18,6 @@ class AppRoutes{
  static final String videoPlayerScreen='videoPlayerScreen';
  static final String paymentCardList='paymentCardList';
  static final String cardDetailScreen='cardDetailScreen';
+ static final String successScreen='successScreen';
+ static final String myCoursesScreen='myCoursesScreen';
 }

@@ -10,20 +10,20 @@ import 'package:foodi/common/images/assets_images.dart';
 
 import '../../app_widgets/app_button.dart';
 
-Widget firstBlueContainer() {
+Widget firstBlueContainer({bool showAppBar=false}) {
   return Container(
     color: AppColors.buttonColor,
-    height: 183.h,
+    height:showAppBar!=true?183.h:0,
     width: 375.w,
     padding: AppSize.bodyPadding(horizontal: 20, vertical: 0),
     child: Column(
       children: [
         AppSize.widgetGap(height:61, width: 0),
-       Row(
+     showAppBar!=true?  Row(
          crossAxisAlignment: CrossAxisAlignment.start,
          mainAxisAlignment: MainAxisAlignment.spaceBetween,
          children: [
-           // First title and sub title
+          // First title and sub title
            Column(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: [
@@ -75,14 +75,15 @@ Widget firstBlueContainer() {
              ),
            ),
          ],
-       ),
+       ):Container(),
       ],
     ),
   );
 }
 // Timer Widget
 
-Widget timerWidget() {
+Widget timerWidget({String? firstRowLastText}) {
+
   return Align(
     alignment: Alignment.bottomCenter,
     child: Container(
@@ -113,14 +114,14 @@ Widget timerWidget() {
                   fontSize: 12,
                 ),
               ),
-              ReuseableText(
+              firstRowLastText!=null?ReuseableText(
                 text: 'My courses',
                 textStyle: AppTStyleAndSize.appBarTStyle().copyWith(
                   color: AppColors.buttonColor,
                   fontWeight: FontWeight.normal,
                   fontSize: 12,
                 ),
-              ),
+              ):Container(),
             ],
           ),
 

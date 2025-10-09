@@ -32,39 +32,78 @@ class _NavBarState extends State<NavBar> {
     Icons.person,
   ];
   List<String> textList = ['Home', 'Course', 'Search', 'Message', 'Profile'];
-  late List<Widget> screenList = [
-    HomeScreen(controller: controllerList[currentValue]),
-    CourseScreen(controller: controllerList[currentValue]),
-    SearchScreen(),
-    MessageScreen(),
-    ProfileScreen(),
-  ];
+
   List<ScrollController> controllerList = List.generate(5, (index) {
     return ScrollController();
   });
 
   List<bool> showAppBar = [false, false, false, false, false];
-  @override
-  void initState() {
 
-    super.initState();
+  @override
+  void dispose() {
+    controllerList[currentValue].dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final controller = controllerList[currentValue];
-
     controller.addListener(() {
       if (controller.position.pixels > 38.0) {
         setState(() {
-          showAppBar[currentValue]=true;
+          showAppBar[currentValue] = true;
+        });
+      } else {
+        setState(() {
+          showAppBar[currentValue] = false;
         });
       }
-
     });
+    final List<Widget> screenList = [
+      HomeScreen(
+        controller: controllerList[currentValue],
+        showAppBar: showAppBar[currentValue],
+      ),
+      CourseScreen(
+        controller: controllerList[currentValue],
+        showAppBar: showAppBar[currentValue],
+      ),
+      SearchScreen(),
+      MessageScreen(),
+      ProfileScreen(),
+    ];
     return Scaffold(
-      appBar: showAppBar[currentValue] == true ? AppBar() : null,
+      appBar: showAppBar[currentValue] == true
+          ? AppAppBar(
+              title: currentValue == 0?
+                   'Hi,Hasan'
+                  : textList[currentValue],
+              actionWidget: currentValue==0?  SizedBox(
+                height: 49.98.h,
+                width: 36.w,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 36.h,
+                      width: 36.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.courseCardColor1,
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 40.h,
+                      width: 36.w,
+                      child: Image.asset(AppAssetsImages.avatar),
+                    ),
+                  ],
+                ),
+              ):null,
+            )
+          : null,
       body: screenList.elementAt(currentValue),
+      backgroundColor: Colors.white,
       bottomNavigationBar: SizedBox(
         height: 111.h,
         width: 375.w,
@@ -94,6 +133,13 @@ class _NavBarState extends State<NavBar> {
                           onTap: () {
                             setState(() {
                               currentValue = index;
+                              // jab tak scrollController =0 tab k koi appbar show nahi hoga
+                              if (currentValue != index) {
+                                showAppBar[index] = true;
+                              } else {
+                                showAppBar[index] = false;
+                                print(currentValue);
+                              }
                             });
                           },
                           child: Column(

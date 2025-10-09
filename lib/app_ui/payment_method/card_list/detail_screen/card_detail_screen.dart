@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/app_routes/app_routes.dart';
 import 'package:foodi/app_ui/app_widgets/app_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_check_box.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_field.dart';
@@ -59,7 +60,9 @@ showModalBottomSheet(context: context, builder: (BuildContext context){
         ),
         AppTextField(hintText: 'Cvv'),
         AppSize.widgetGap(height: 30),
-        AppBtn(width: 335, text: 'Pay Now'),
+        AppBtn(width: 335, text: 'Add Card',onTap: (){
+          Navigator.pop(context);
+        },),
       ],
     ),
   );
@@ -92,8 +95,59 @@ showModalBottomSheet(context: context, builder: (BuildContext context){
           AppSize.widgetGap(height: 20.h),
           Padding(
             padding: AppSize.bodyPadding2(left: 20, right: 20),
-            child: masterCard(),
+            child: InkWell(
+                onTap: (){
+                  showModalBottomSheet(context: context, builder: (BuildContext context){
+                    return Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+
+
+                      ),
+                      height: 572.h, width: 375.w,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppSize.widgetGap(height: 16),
+                          ReuseableText(
+                            text: 'Card holder name',
+                            textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
+                          ),
+                          AppTextField(hintText: 'Name on card'),
+                          AppSize.widgetGap(height: 16),
+                          ReuseableText(
+                            text: 'Card number',
+                            textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
+                          ),
+
+                          AppTextField(hintText: 'Card number'),
+                          AppSize.widgetGap(height: 16),
+                          ReuseableText(
+                            text: 'Expiry date',
+                            textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
+                          ),
+                          AppTextField(hintText: 'Expiry date'),
+                          AppSize.widgetGap(height: 16),
+
+                          ReuseableText(
+                            text: 'Cvv',
+                            textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
+                          ),
+                          AppTextField(hintText: 'Cvv'),
+                          AppSize.widgetGap(height: 30),
+                          AppBtn(width: 335, text: 'Add Card',onTap: (){Navigator.pop(context);},),
+                        ],
+                      ),
+                    );
+                  });
+                },
+                child: masterCard()),
           ),
+          AppSize.widgetGap(height: 20.h),
+          Padding(
+            padding: AppSize.bodyPadding2(left: 20, right: 20),
+            child: AppBtn(width: 375,text: 'Pay Now',onTap: (){Navigator.pushNamed(context, AppRoutes.successScreen);},),
+          )
 
 
         ],

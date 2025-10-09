@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:foodi/app_routes/app_routes.dart';
+import 'package:foodi/app_ui/my_courses/my_courses_screen.dart';
 import 'package:foodi/app_ui/nave_bar/course_screen/course_screen.dart';
 import 'package:foodi/app_ui/datail_screen/detail_screen.dart';
 import 'package:foodi/app_ui/nave_bar/home_screen/home_screen.dart';
@@ -14,6 +15,7 @@ import 'package:foodi/app_ui/onboarding_scr/on_boarding_secree2.dart';
 import 'package:foodi/app_ui/onboarding_scr/onboarding_screen3.dart';
 import 'package:foodi/app_ui/payment_method/card_list/detail_screen/card_detail_screen.dart';
 import 'package:foodi/app_ui/payment_method/card_list/card_list_screen/card_list.dart';
+import 'package:foodi/app_ui/payment_method/card_list/sucess_screen.dart';
 import 'package:foodi/app_ui/user_auth/continue_with_phone_screen.dart';
 import 'package:foodi/app_ui/user_auth/login_screen.dart';
 import 'package:foodi/app_ui/user_auth/otp_screen.dart';
@@ -56,6 +58,9 @@ class AppRouting {
     AppRouting(routeName: AppRoutes.videoPlayerScreen, route: VideoPlayerScreen()),
     AppRouting(routeName: AppRoutes.paymentCardList, route: CardList()),
     AppRouting(routeName: AppRoutes.cardDetailScreen, route: CardDetailScreen()),
+    AppRouting(routeName: AppRoutes.successScreen, route: SuccessScreen()),
+    AppRouting(routeName: AppRoutes. myCoursesScreen, route: MyCoursesScreen()),
+    AppRouting(routeName: AppRoutes.forgetPasswordScreen, route: OtpScreen()),
   ];
 
   static CupertinoPageRoute onGenerateRoute(
