@@ -1,10 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_routes/onGenerateRoute.dart';
 
-void main() {
+void main() async {
+  AppRouting.blocProviderList();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyDyzrzayRJDSr1rgMcg3DJWaqdw7T0iKX8",
+      appId: "1:301740951111:android:9bf33c80c4ed568720d362",
+      messagingSenderId: "301740951111",
+      projectId: "learningapp-4c35b",
+    ),
+  );
   runApp(
     ScreenUtilInit(
       designSize: Size(375, 812),
@@ -19,15 +31,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+    return MultiBlocProvider(
+      // ya syntext serep ek hi list or same type ka list hum es tarah direct pass kar saktay hay
+      //providers: AppRouting.blocProviderList(),
+      providers: AppRouting.blocProviderList(),
 
-      onGenerateRoute: (RouteSettings settings) =>
-          AppRouting.onGenerateRoute(settings, context),
+      // yaha per spread oprater use hoa hay ... kisi b list m,ay mutiple list add karnay ho to spred oprtaer use kya jata hay
+      //providers: [...AppRouting.blocProviderList(),...AppRouting.blocProvider()],
+
+      child: MaterialApp(
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+
+        onGenerateRoute: (RouteSettings settings) =>
+            AppRouting.onGenerateRoute(settings, context),
+      ),
     );
   }
 }

@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_ui/app_widgets/app_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_field.dart';
 import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
-import 'package:foodi/app_ui/user_auth/otp_screen.dart';
+import 'package:foodi/app_ui/user_auth/otp_screen/otp_screen.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
 
-import '../../app_routes/app_routes.dart';
+import '../../../app_routes/app_routes.dart';
 
 class ContinueWithPhoneScreen extends StatelessWidget {
   const ContinueWithPhoneScreen({super.key});

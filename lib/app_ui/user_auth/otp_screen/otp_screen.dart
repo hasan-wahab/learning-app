@@ -9,7 +9,7 @@ import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
 
-import '../../app_routes/app_routes.dart';
+import '../../../app_routes/app_routes.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});

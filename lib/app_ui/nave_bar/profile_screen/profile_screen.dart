@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 
-import '../../common/app_style/app_colors.dart';
-import '../../common/app_style/app_size.dart';
-import '../../common/images/assets_images.dart';
+import '../../../common/app_style/app_colors.dart';
+import '../../../common/app_style/app_size.dart';
+import '../../../common/images/assets_images.dart';
 
 class ProfileScreen extends StatelessWidget {
    ProfileScreen({super.key});

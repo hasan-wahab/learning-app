@@ -37,7 +37,7 @@ class MyCoursesScreen extends StatelessWidget {
             ],
           ),
           AppSize.widgetGap(height: 12, width: 0),
-          timerWidget(),
+          timerWidget(context: context),
           AppSize.widgetGap(height: 20, width: 0),
           Wrap(
             runSpacing: AppSize.colomnSpacing(height: 16),

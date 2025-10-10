@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/app_ui/app_widgets/app_button.dart';
 import 'package:foodi/app_ui/onboarding_scr/onboarding_widgets.dart';
-import 'package:foodi/app_ui/user_auth/sign_up_screen.dart';
+import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_screen.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
@@ -31,10 +31,8 @@ class OnboardingScreen3 extends StatelessWidget {
               text:
                   'Study according to the study plan, make study more motivated',
             ),
-            AppSize.widgetGap(height: 26),
+            AppSize.widgetGap(height: 107.75),
 
-            threeDots(currentValue: 2),
-            AppSize.widgetGap(height: 81.75),
             SizedBox(
               child: Row(
                 spacing: AppSize.rowSpacing(width: 15),
@@ -45,14 +43,24 @@ class OnboardingScreen3 extends StatelessWidget {
                     width: 160,
                     height: 50,
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, AppRoutes.signUpScreen);
+                      Navigator.pushReplacementNamed(
+                        context,
+                        AppRoutes.signUpScreen,
+                      );
                     },
                   ),
                   AppBtn(
-                      isColor: false,
-                      text: 'Log In', width: 160, height: 50, onTap: () {
-                    Navigator.pushReplacementNamed(context, AppRoutes.loginScreen);
-                  }),
+                    isColor: false,
+                    text: 'Log In',
+                    width: 160,
+                    height: 50,
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        AppRoutes.loginScreen,
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

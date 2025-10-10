@@ -40,13 +40,9 @@ class _OnBoardingSecreen2State extends State<OnBoardingSecreen2> {
               text:
                   'Easy and fast learning at any time to help you improve various skills',
             ),
-            AppSize.widgetGap(height: 26),
-            threeDots(currentValue: 1),
-            AppSize.widgetGap(height: 44, width: 0),
-            // AppSize.widgetGap(height: 215),
-            circleButton(context: context,onTap: (){
-              Navigator.pushReplacementNamed(context, AppRoutes.thirdOnboardingScreen);
-            }),
+            AppSize.widgetGap(height: 70,),
+
+
           ],
         ),
       ),

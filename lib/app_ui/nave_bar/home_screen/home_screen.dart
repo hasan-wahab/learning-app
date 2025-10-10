@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
           child: Stack(
             children: [
               firstBlueContainer(showAppBar: showAppBar),
-              timerWidget(firstRowLastText: 'My courses'),
+              timerWidget(firstRowLastText: 'My courses',context: context),
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 class AppRoutes{
   AppRoutes._();
- static final String firstOnboardingScreen='/';
+ static final String firstOnboardingScreen='firstOnboardingScreen';
  static final String secondOnboardingScreen='secondOnboardingScreen';
  static final String thirdOnboardingScreen='thirdOnboardingScreen';
  static final String signUpScreen='signUpScreen';
@@ -20,4 +20,5 @@ class AppRoutes{
  static final String cardDetailScreen='cardDetailScreen';
  static final String successScreen='successScreen';
  static final String myCoursesScreen='myCoursesScreen';
+ static final String onBoardingPersonClass='/';
 }

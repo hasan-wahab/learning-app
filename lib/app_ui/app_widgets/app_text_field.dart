@@ -7,7 +7,21 @@ class AppTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final double height;
   final double width;
-  const AppTextField({super.key, this.icon, this.hintText,this.height=50,this.width=327, this.prefixIcon});
+  String Function(String? value)? validator;
+  TextEditingController? controller = TextEditingController();
+  void Function(String value)? onChange;
+
+  AppTextField({
+    super.key,
+    this.icon,
+    this.hintText,
+    this.height = 50,
+    this.width = 327,
+    this.prefixIcon,
+    this.controller,
+    this.validator,
+    this.onChange,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +30,11 @@ class AppTextField extends StatelessWidget {
       width: width.w,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
       child: TextFormField(
-
+        onChanged: (value)=>onChange!(value),
+        validator: (value) => validator!(value),
+        controller: controller,
         decoration: InputDecoration(
-         prefixIcon:prefixIcon,
+          prefixIcon: prefixIcon,
 
           hintText: hintText,
           suffixIcon: icon,

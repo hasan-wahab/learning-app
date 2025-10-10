@@ -35,13 +35,8 @@ class _OnBoadingScreen1State extends State<OnBoadingScreen1> {
             secondText(
               text: 'Free courses for you to find your way to learning',
             ),
-            AppSize.widgetGap(height: 62),
-            threeDots(currentValue: 0),
-            AppSize.widgetGap(height: 44, width: 0),
-            // AppSize.widgetGap(height: 215),
-          circleButton(context: context,onTap: (){
-            Navigator.pushReplacementNamed(context, AppRoutes.secondOnboardingScreen);
-          }),
+
+            
           ],
         ),
       ),

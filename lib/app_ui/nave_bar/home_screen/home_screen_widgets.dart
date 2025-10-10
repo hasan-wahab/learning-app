@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/app_routes/app_routes.dart';
 import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
@@ -82,7 +83,7 @@ Widget firstBlueContainer({bool showAppBar=false}) {
 }
 // Timer Widget
 
-Widget timerWidget({String? firstRowLastText}) {
+Widget timerWidget({String? firstRowLastText,required BuildContext context}) {
 
   return Align(
     alignment: Alignment.bottomCenter,
@@ -114,12 +115,17 @@ Widget timerWidget({String? firstRowLastText}) {
                   fontSize: 12,
                 ),
               ),
-              firstRowLastText!=null?ReuseableText(
-                text: 'My courses',
-                textStyle: AppTStyleAndSize.appBarTStyle().copyWith(
-                  color: AppColors.buttonColor,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12,
+              firstRowLastText!=null?InkWell(
+                onTap: (){
+                  Navigator.pushNamed(context, AppRoutes.myCoursesScreen);
+                },
+                child: ReuseableText(
+                  text: 'My courses',
+                  textStyle: AppTStyleAndSize.appBarTStyle().copyWith(
+                    color: AppColors.buttonColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 12,
+                  ),
                 ),
               ):Container(),
             ],

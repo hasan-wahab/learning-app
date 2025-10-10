@@ -4,13 +4,13 @@ import 'package:foodi/app_ui/app_widgets/app_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_field.dart';
 import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
-import 'package:foodi/app_ui/user_auth/continue_with_phone_screen.dart';
+import 'package:foodi/app_ui/user_auth/continue_with_phone/continue_with_phone_screen.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
 
-import '../../app_routes/app_routes.dart';
+import '../../../app_routes/app_routes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
