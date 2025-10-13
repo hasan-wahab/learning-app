@@ -1,4 +1,4 @@
-class SignUpEvents {}
+abstract class SignUpEvents {}
 
 class EmailEvent extends SignUpEvents {
   String email;
@@ -8,7 +8,6 @@ class EmailEvent extends SignUpEvents {
 
 class PasswordEvent extends SignUpEvents {
   String password;
-
   PasswordEvent({required this.password});
 }
 
@@ -26,4 +25,10 @@ class AgreeWithTermsAndConditionEvent extends SignUpEvents {
   bool isAgree;
 
   AgreeWithTermsAndConditionEvent({required this.isAgree});
+}
+
+class ObscureTextEvent extends SignUpEvents {
+  bool obscureText;
+
+  ObscureTextEvent({required this.obscureText});
 }

@@ -10,7 +10,7 @@ class AppTextField extends StatelessWidget {
   String Function(String? value)? validator;
   TextEditingController? controller = TextEditingController();
   void Function(String value)? onChange;
-
+   bool obscureText;
   AppTextField({
     super.key,
     this.icon,
@@ -21,6 +21,7 @@ class AppTextField extends StatelessWidget {
     this.controller,
     this.validator,
     this.onChange,
+    this.obscureText=false,
   });
 
   @override
@@ -30,6 +31,7 @@ class AppTextField extends StatelessWidget {
       width: width.w,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
       child: TextFormField(
+        obscureText: obscureText,
         onChanged: (value)=>onChange!(value),
         validator: (value) => validator!(value),
         controller: controller,

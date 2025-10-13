@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +7,6 @@ import 'package:foodi/app_ui/app_widgets/app_check_box.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_button.dart';
 import 'package:foodi/app_ui/app_widgets/app_text_field.dart';
 import 'package:foodi/app_ui/app_widgets/reuseable_text.dart';
-import 'package:foodi/app_ui/user_auth/login_screen/login_screen.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_bloc.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_events.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_states.dart';
@@ -25,11 +25,39 @@ class SignUpScreen extends StatelessWidget {
     var addEvent = context.read<SignUpScreenBloc>();
     return BlocConsumer<SignUpScreenBloc, SignUpStates>(
       listener: (context, listener) {
-        if (listener.errorMsg != '' || listener.errorMsg.isNotEmpty) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(listener.errorMsg)));
-          addEvent.add(ErrorEvent(errorMsg: ''));
+        if (listener.errorMsg.isNotEmpty && listener.isLoading == false) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Message'),
+                content: Text(listener.errorMsg),
+                actions: [
+                  InkWell(
+                    onTap: () {
+                      if (listener.errorMsg ==
+                          'Please check your email inbox to follow the link and verify you email.') {
+                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutes.loginScreen,
+                        );
+                      } else {
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: ReuseableText(
+                      text:
+                          listener.errorMsg ==
+                              'Please check your email inbox to follow the link and verify you email.'
+                          ? 'Continue'
+                          : 'Ok',
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
         }
       },
       builder: (context, state) {
@@ -46,111 +74,113 @@ class SignUpScreen extends StatelessWidget {
           //         ),
           //       ),
           backgroundColor: AppColors.backgroundColor,
-          body: state.isLoading
-              ? Center(child: CircularProgressIndicator())
-              : ListView(
-                  // controller: scrollController,
-                  padding: AppSize.bodyPadding(horizontal: 24, vertical: 0),
-                  children: [
-                    AppSize.widgetGap(height: 86),
+          body: ListView(
+            // controller: scrollController,
+            padding: AppSize.bodyPadding(horizontal: 24, vertical: 0),
+            children: [
+              AppSize.widgetGap(height: 86),
 
-                    ReuseableText(
-                      text: 'SignUp',
-                      textStyle: AppTStyleAndSize.firstTextStyle(),
+              ReuseableText(
+                text: 'SignUp',
+                textStyle: AppTStyleAndSize.firstTextStyle(),
+              ),
+
+              ReuseableText(
+                text: 'Enter your details below & free sign up',
+                textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
+              ),
+
+              AppSize.widgetGap(height: 43),
+              ReuseableText(
+                text: 'Your email',
+                textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+                  fontSize: 14.sp,
+                ),
+              ),
+              // Text Field
+              AppTextField(
+                onChange: (value) {
+                  addEvent.add(EmailEvent(email: value.toString()));
+                },
+                hintText: 'Enter your email',
+              ),
+              AppSize.widgetGap(height: 24),
+              ReuseableText(
+                text: 'Create password',
+                textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+                  fontSize: 14.sp,
+                ),
+              ),
+              AppTextField(
+                obscureText: state.obscureText,
+                onChange: (value) {
+                  addEvent.add(PasswordEvent(password: value.toString()));
+                },
+                icon: InkWell(
+                  onTap: () {
+                    addEvent.add(
+                      ObscureTextEvent(
+                        obscureText: state.obscureText = !state.obscureText,
+                      ),
+                    );
+                  },
+                  child: state.obscureText == true
+                      ? Icon(CupertinoIcons.eye_slash)
+                      : Icon(CupertinoIcons.eye),
+                ),
+                hintText: 'Enter your Password',
+              ),
+              AppSize.widgetGap(height: 24),
+              AppBtn(
+                icon: state.isLoading == true
+                    ? CircularProgressIndicator(color: Colors.white)
+                    : null,
+                width: 327,
+                height: 50,
+                text: state.isLoading == false ? 'Create account' : null,
+                onTap: () async {
+                  UserAuthHandler.userSignUp(context: context);
+                },
+              ),
+              AppSize.widgetGap(height: 17),
+              AppCheckBox(
+                state: state,
+                text:
+                    'By creating an account you have to agree with our terms & condition.',
+                onTap: () {
+                  addEvent.add(
+                    AgreeWithTermsAndConditionEvent(
+                      isAgree: state.isAgree = !state.isAgree,
                     ),
-
+                  );
+                },
+              ),
+              AppSize.widgetGap(height: 25),
+              SizedBox(
+                width: 202.w,
+                height: 18,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     ReuseableText(
-                      text: 'Enter your details below & free sign up',
+                      text: 'Already have an account？',
+                      // text: state.email,
                       textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
                     ),
-
-                    AppSize.widgetGap(height: 43),
-                    ReuseableText(
-                      text: 'Your email',
-                      textStyle: AppTStyleAndSize.fourthSmallTextStyle()
-                          .copyWith(fontSize: 14.sp),
-                    ),
-                    // Text Field
-                    AppTextField(
-                      onChange: (value) {
-                        addEvent.add(EmailEvent(email: value.toString()));
-                      },
-                      hintText: 'Enter your email',
-                    ),
-                    AppSize.widgetGap(height: 24),
-                    ReuseableText(
-                      text: 'Your password',
-                      textStyle: AppTStyleAndSize.fourthSmallTextStyle()
-                          .copyWith(fontSize: 14.sp),
-                    ),
-                    AppTextField(
-                      onChange: (value) {
-                        addEvent.add(PasswordEvent(password: value.toString()));
-                      },
-                      icon: Icon(Icons.remove_red_eye_rounded),
-                      hintText: 'Enter your Password',
-                    ),
-                    AppSize.widgetGap(height: 24),
-                    AppBtn(
-                      width: 327,
-                      height: 50,
-                      text: 'Create account',
-                      onTap: () async {
-                        if (state.email.isEmpty || state.password.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Enter Required Field')),
-                          );
-                        } else {
-                          UserAuthHandler.userSignUp(
-                            state: state,
-                            context: context,
-                          );
-                        }
-                      },
-                    ),
-                    AppSize.widgetGap(height: 17),
-                    AppCheckBox(
-                      state: state,
-                      text:
-                          'By creating an account you have to agree with our terms & condition.',
+                    AppTextButton(
                       onTap: () {
-                        addEvent.add(
-                          AgreeWithTermsAndConditionEvent(
-                            isAgree: state.isAgree == true
-                                ? false
-                                : state.isAgree == false
-                                ? true
-                                : false,
-                          ),
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutes.loginScreen,
                         );
                       },
-                    ),
-                    AppSize.widgetGap(height: 25),
-                    SizedBox(
-                      width: 202.w,
-                      height: 18,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ReuseableText(
-                            text: 'Already have an account？',
-                            // text: state.email,
-                            textStyle: AppTStyleAndSize.fourthSmallTextStyle(),
-                          ),
-                          AppTextButton(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(
-                                context,
-                                AppRoutes.loginScreen,
-                              );
-                            },
-                            text: 'Log In',
-                          ),
-                        ],
-                      ),
+                      text: 'Log In',
                     ),
                   ],
                 ),
+              ),
+            ],
+          ),
         );
       },
     );

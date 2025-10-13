@@ -2,8 +2,9 @@ class SignUpStates {
   final String email;
   final String password;
   final String errorMsg;
-  final bool isLoading;
-  final bool isAgree;
+   bool isLoading;
+   bool isAgree;
+   bool obscureText;
 
   SignUpStates({
     this.email = '',
@@ -11,6 +12,7 @@ class SignUpStates {
     this.errorMsg = '',
     this.isLoading = false,
     this.isAgree =false,
+    this.obscureText=true,
   });
 
   SignUpStates copyWith({
@@ -19,6 +21,7 @@ class SignUpStates {
     String? errorMsg,
     bool isLoading = false,
     bool isAgree=false,
+    bool obscureText=true,
   }) {
     return SignUpStates(
       email: email ?? this.email,
@@ -26,6 +29,7 @@ class SignUpStates {
       errorMsg: errorMsg ?? this.errorMsg,
       isLoading: isLoading,
       isAgree: isAgree,
+      obscureText: obscureText,
     );
   }
 }
