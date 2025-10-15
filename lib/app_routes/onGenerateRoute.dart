@@ -66,7 +66,7 @@ class AppRouting {
     AppRouting(
       routeName: AppRoutes.loginScreen,
       route: LoginScreen(),
-      bloc: BlocProvider(create: (_) => LoginScreenBloc(0)),
+      bloc: BlocProvider(create: (_) => LoginScreenBloc()),
     ),
     AppRouting(
       routeName: AppRoutes.continueWithPhoneScreen,
