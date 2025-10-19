@@ -7,6 +7,9 @@ import 'package:foodi/app_ui/user_auth/login_screen/login_screen_bloc/login_scre
 import 'package:foodi/app_ui/user_auth/login_screen/login_screen_bloc/login_screen_events.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_bloc.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_events.dart';
+import 'package:foodi/local_storage_service/app_keys/app_keys.dart';
+import 'package:foodi/local_storage_service/local_data/local_data.dart';
+import 'package:foodi/models/student_auth_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class UserAuthHandler {
@@ -17,11 +20,12 @@ class UserAuthHandler {
     final state = context.read<SignUpScreenBloc>().state;
     FirebaseAuth auth = FirebaseAuth.instance;
 
-    if (state.email == '' || state.password == '') {
+    if (state.email == '' || state.password == '' || state.username == '') {
       bloc.add(ErrorEvent(errorMsg: 'Enter required fields'));
     } else if (state.isAgree == false &&
         state.email != '' &&
-        state.password != '') {
+        state.password != '' &&
+        state.username != '') {
       bloc.add(
         ErrorEvent(
           errorMsg: 'Please agree to the Terms & Conditions before signing up.',
@@ -45,6 +49,7 @@ class UserAuthHandler {
           );
           saveUserData(
             context: context,
+            username: state.username,
             email: state.email,
             isAgree: state.isAgree,
           );
@@ -83,6 +88,7 @@ class UserAuthHandler {
   }
 
   static saveUserData({
+    String? username,
     String? email,
     bool isAgree = false,
     required BuildContext context,
@@ -90,17 +96,21 @@ class UserAuthHandler {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     final bloc = context.read<SignUpScreenBloc>();
     String userId = DateTime.now().millisecondsSinceEpoch.toString();
+    StudentAuthModel studentAuthModel = StudentAuthModel(
+      studentName: username.toString(),
+      id: userId,
+      studentEmailId: email.toString(),
+      createAt: Timestamp.now(),
+      updateAt: null,
+      isAgree: isAgree,
+      isGoogleSignIn: false,
+    );
     if (email!.isNotEmpty) {
       try {
         await firestore
             .collection('User')
             .doc(userId)
-            .set({
-              'Email': email,
-              'IsAgree': isAgree,
-              'UserId': userId,
-              'IsGoogleSignIn': false,
-            })
+            .set(studentAuthModel.toMap())
             .then((value) {
               print(email + isAgree.toString());
             });
@@ -138,7 +148,8 @@ class UserAuthHandler {
               bloc.add(LoginLoadingEvent(isLoading: false));
               bloc.add(
                 LoginErrorEvent(
-                  errorMsg: 'Please follow the link and verify to user',
+                  errorMsg:
+                      'Please check your email inbox to follow the link and verify you email.',
                 ),
               );
             });
@@ -187,15 +198,20 @@ class UserAuthHandler {
       return await userCredential.then((onValue) {
         String userId = DateTime.now().millisecondsSinceEpoch.toString();
         FirebaseFirestore firestore = FirebaseFirestore.instance;
-        firestore.collection('User').doc(userId).set({
-          'Email': googleUser.email,
-          'IsAgree': true,
-          'UserId': userId,
-          'IsGoogleSignIn': true,
-        });
+        StudentAuthModel studentAuthModel = StudentAuthModel(
+          studentName: googleUser.displayName.toString(),
+          id: userId,
+          studentEmailId: googleUser.email,
+          createAt: Timestamp.now(),
+          updateAt: null,
+          isAgree: true,
+          isGoogleSignIn: true,
+          profileImage: googleUser.photoUrl,
+        );
+        firestore.collection('User').doc(userId).set(studentAuthModel.toMap());
 
         bloc.add(LoginLoadingEvent(isLoading: false));
-        Navigator.pushReplacementNamed(context, AppRoutes.naveBar);
+        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.naveBar,(route)=>false);
       });
     } on Exception catch (e) {
       print(e);

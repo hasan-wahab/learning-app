@@ -1,5 +1,11 @@
 abstract class SignUpEvents {}
 
+class NameEvent extends SignUpEvents {
+  String username;
+
+  NameEvent({required this.username});
+}
+
 class EmailEvent extends SignUpEvents {
   String email;
 

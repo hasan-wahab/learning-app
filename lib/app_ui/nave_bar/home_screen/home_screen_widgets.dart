@@ -120,7 +120,7 @@ Widget timerWidget({String? firstRowLastText,required BuildContext context}) {
                   Navigator.pushNamed(context, AppRoutes.myCoursesScreen);
                 },
                 child: ReuseableText(
-                  text: 'My courses',
+                  text: firstRowLastText,
                   textStyle: AppTStyleAndSize.appBarTStyle().copyWith(
                     color: AppColors.buttonColor,
                     fontWeight: FontWeight.normal,

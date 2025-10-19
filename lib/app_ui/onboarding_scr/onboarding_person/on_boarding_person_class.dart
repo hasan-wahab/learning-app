@@ -9,6 +9,8 @@ import 'package:foodi/app_ui/onboarding_scr/onboarding_person/onboarding_person_
 import 'package:foodi/app_ui/onboarding_scr/onboarding_screen3.dart';
 import 'package:foodi/app_ui/onboarding_scr/onboarding_widgets.dart';
 
+import '../../../local_storage_service/local_data/local_data.dart';
+
 class OnBoardingPersonClass extends StatelessWidget {
   const OnBoardingPersonClass({super.key});
 
@@ -61,6 +63,7 @@ class OnBoardingPersonClass extends StatelessWidget {
                             NextPageEvent(value: state.value++),
                           );
                           pageControllerFunc();
+
                         },
                       )
                     : Container(),

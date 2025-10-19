@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -36,9 +37,12 @@ import 'package:foodi/app_ui/user_auth/login_screen/login_screen_bloc/login_scre
 import 'package:foodi/app_ui/user_auth/otp_screen/otp_screen.dart';
 import 'package:foodi/app_ui/user_auth/otp_screen/otp_screen_bloc/otp_screen_bloc.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_bloc.dart';
+import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_events.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_screen.dart';
 import 'package:foodi/app_ui/video_player/video_player_bloc/video_player_bloc.dart';
 import 'package:foodi/app_ui/video_player/video_player_screen.dart';
+import 'package:foodi/local_storage_service/local_data/local_data.dart';
+import 'package:foodi/main.dart';
 
 class AppRouting {
   final String? routeName;
@@ -153,18 +157,40 @@ class AppRouting {
     BuildContext context,
   ) {
     if (settings.name!.isNotEmpty) {
+      FirebaseAuth auth = FirebaseAuth.instance;
+
       final result = routeList
           .where((test) => test.routeName == settings.name)
           .toList();
+
       if (result.isNotEmpty) {
+        final bool? firstTimeAppOpen;
+        firstTimeAppOpen = AppLocalDataStorage.getData();
+
+        // onBoardingPersonClass - [This is basically is initial route name]
+        if (firstTimeAppOpen == true &&
+            result.first.routeName == AppRoutes.onBoardingPersonClass) {
+          return CupertinoPageRoute(
+            builder: (context) =>
+                auth.currentUser == null ? LoginScreen() : NavBar(),
+            settings: settings,
+          );
+        }
+        print(result.single.routeName);
+
+        // agr haymary pass list may jo b screen ham return karna chahtay hay to wo list may add ho
+        // to return karay ga other vise else return karay ga
         return CupertinoPageRoute(
           builder: (_) => result.first.route,
           settings: settings,
         );
       }
+      // agar koi screen hamary pass routeList may add na ho or ham navigate kartay hay
+      // to OnboardinbgScreen1 return karay ga
 
-      return CupertinoPageRoute(builder: (_) => OnBoardingPersonClass());
+      return CupertinoPageRoute(builder: (_) => OnBoadingScreen1());
     } else {
+      print('setting  is empty');
       return CupertinoPageRoute(builder: (_) => OnBoardingPersonClass());
     }
   }

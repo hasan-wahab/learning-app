@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodi/local_storage_service/local_data/local_data.dart';
 
 import 'app_routes/onGenerateRoute.dart';
 
 void main() async {
-  AppRouting.blocProviderList();
   WidgetsFlutterBinding.ensureInitialized();
+  await AppLocalDataStorage.init();
   await Firebase.initializeApp(
     options: FirebaseOptions(
       apiKey: "AIzaSyDyzrzayRJDSr1rgMcg3DJWaqdw7T0iKX8",
@@ -38,17 +39,18 @@ class MyApp extends StatelessWidget {
 
       // yaha per spread oprater use hoa hay ... kisi b list m,ay mutiple list add karnay ho to spred oprtaer use kya jata hay
       //providers: [...AppRouting.blocProviderList(),...AppRouting.blocProvider()],
-
       child: MaterialApp(
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-
+        // initialRoute:AppRoutes.onBoardingPersonClass,
         onGenerateRoute: (RouteSettings settings) =>
             AppRouting.onGenerateRoute(settings, context),
       ),
+      //   },
+      // ),
     );
   }
 }

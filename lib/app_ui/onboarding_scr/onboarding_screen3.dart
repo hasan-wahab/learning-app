@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:foodi/app_ui/app_widgets/app_button.dart';
+
 import 'package:foodi/app_ui/onboarding_scr/onboarding_widgets.dart';
-import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_screen.dart';
 import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
-import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
+import 'package:foodi/local_storage_service/local_data/local_data.dart';
 
 import '../../app_routes/app_routes.dart';
 
@@ -47,6 +47,8 @@ class OnboardingScreen3 extends StatelessWidget {
                         context,
                         AppRoutes.signUpScreen,
                       );
+                       AppLocalDataStorage.saveData();
+
                     },
                   ),
                   AppBtn(
@@ -59,6 +61,7 @@ class OnboardingScreen3 extends StatelessWidget {
                         context,
                         AppRoutes.loginScreen,
                       );
+                      AppLocalDataStorage.saveData();
                     },
                   ),
                 ],

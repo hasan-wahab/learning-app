@@ -14,6 +14,7 @@ import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
+import 'package:foodi/local_storage_service/local_data/local_data.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -75,31 +76,31 @@ class _NavBarState extends State<NavBar> {
     return Scaffold(
       appBar: showAppBar[currentValue] == true
           ? AppAppBar(
-              title: currentValue == 0?
-                   'Hi,Hasan'
-                  : textList[currentValue],
-              actionWidget: currentValue==0?  SizedBox(
-                height: 49.98.h,
-                width: 36.w,
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 36.h,
+              title: currentValue == 0 ? 'Hi,Hasan' : textList[currentValue],
+              actionWidget: currentValue == 0
+                  ? SizedBox(
+                      height: 49.98.h,
                       width: 36.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.courseCardColor1,
-                      ),
-                    ),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 36.h,
+                            width: 36.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.courseCardColor1,
+                            ),
+                          ),
 
-                    SizedBox(
-                      height: 40.h,
-                      width: 36.w,
-                      child: Image.asset(AppAssetsImages.avatar),
-                    ),
-                  ],
-                ),
-              ):null,
+                          SizedBox(
+                            height: 40.h,
+                            width: 36.w,
+                            child: Image.asset(AppAssetsImages.avatar),
+                          ),
+                        ],
+                      ),
+                    )
+                  : null,
             )
           : null,
       body: screenList.elementAt(currentValue),
@@ -130,7 +131,7 @@ class _NavBarState extends State<NavBar> {
                       return SizedBox(
                         width: 52.w,
                         child: InkWell(
-                          onTap: () {
+                          onTap: () async {
                             setState(() {
                               currentValue = index;
                               // jab tak scrollController =0 tab k koi appbar show nahi hoga

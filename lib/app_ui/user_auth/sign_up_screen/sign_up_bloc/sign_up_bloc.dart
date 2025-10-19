@@ -4,6 +4,18 @@ import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_state
 
 class SignUpScreenBloc extends Bloc<SignUpEvents, SignUpStates> {
   SignUpScreenBloc() : super(SignUpStates()) {
+    on<NameEvent>((event, emit) {
+      emit(
+        state.copyWith(
+          username: event.username,
+          email: state.email,
+          errorMsg: '',
+          isAgree: state.isAgree,
+          isLoading: false,
+          obscureText: state.obscureText,
+        ),
+      );
+    });
     on<EmailEvent>((event, emit) {
       emit(
         state.copyWith(
@@ -76,7 +88,13 @@ class SignUpScreenBloc extends Bloc<SignUpEvents, SignUpStates> {
       print(state.isAgree);
     });
     on<ObscureTextEvent>((event, emit) {
-      emit(state.copyWith(obscureText: event.obscureText,isAgree: state.isAgree,isLoading: state.isLoading),);
+      emit(
+        state.copyWith(
+          obscureText: event.obscureText,
+          isAgree: state.isAgree,
+          isLoading: state.isLoading,
+        ),
+      );
     });
   }
 }

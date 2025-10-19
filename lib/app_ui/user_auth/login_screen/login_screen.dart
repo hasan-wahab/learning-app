@@ -140,6 +140,7 @@ class LoginScreen extends StatelessWidget {
                 text: state.isLoading != true ? 'Log In' : null,
                 onTap: () {
                   UserAuthHandler.userLogIn(context: context);
+
                 },
               ),
               AppSize.widgetGap(height: 26),

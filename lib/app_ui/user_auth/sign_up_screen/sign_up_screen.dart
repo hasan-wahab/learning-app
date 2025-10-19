@@ -92,6 +92,20 @@ class SignUpScreen extends StatelessWidget {
 
               AppSize.widgetGap(height: 43),
               ReuseableText(
+                text: 'Your name',
+                textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+                  fontSize: 14.sp,
+                ),
+              ),
+              // Text Field
+              AppTextField(
+                onChange: (value) {
+                  addEvent.add(NameEvent(username: value.toString()));
+                },
+                hintText: 'Enter your username',
+              ),
+              AppSize.widgetGap(height: 24),
+              ReuseableText(
                 text: 'Your email',
                 textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
                   fontSize: 14.sp,
