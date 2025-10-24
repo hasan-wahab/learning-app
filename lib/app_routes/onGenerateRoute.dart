@@ -37,12 +37,10 @@ import 'package:foodi/app_ui/user_auth/login_screen/login_screen_bloc/login_scre
 import 'package:foodi/app_ui/user_auth/otp_screen/otp_screen.dart';
 import 'package:foodi/app_ui/user_auth/otp_screen/otp_screen_bloc/otp_screen_bloc.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_bloc.dart';
-import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_events.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_screen.dart';
 import 'package:foodi/app_ui/video_player/video_player_bloc/video_player_bloc.dart';
 import 'package:foodi/app_ui/video_player/video_player_screen.dart';
 import 'package:foodi/local_storage_service/local_data/local_data.dart';
-import 'package:foodi/main.dart';
 
 class AppRouting {
   final String? routeName;
@@ -54,6 +52,9 @@ class AppRouting {
     required this.route,
     required this.bloc,
   });
+  static Future currentUserReload() async {
+    return await FirebaseAuth.instance.currentUser!.reload();
+  }
 
   static List<AppRouting> routeList = [
     AppRouting(
@@ -167,12 +168,19 @@ class AppRouting {
         final bool? firstTimeAppOpen;
         firstTimeAppOpen = AppLocalDataStorage.getData();
 
-        // onBoardingPersonClass - [This is basically is initial route name]
+        // onBoardingPersonClass - [This is initial route name]
         if (firstTimeAppOpen == true &&
             result.first.routeName == AppRoutes.onBoardingPersonClass) {
           return CupertinoPageRoute(
-            builder: (context) =>
-                auth.currentUser == null ? LoginScreen() : NavBar(),
+            builder: (context) {
+              currentUserReload();
+              if (auth.currentUser != null) {
+                return NavBar();
+              } else {
+                return LoginScreen();
+              }
+            },
+
             settings: settings,
           );
         }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:foodi/app_routes/app_routes.dart';
 import 'package:foodi/app_ui/user_auth/login_screen/login_screen_bloc/login_screen_bloc.dart';
 import 'package:foodi/app_ui/user_auth/login_screen/login_screen_bloc/login_screen_events.dart';
@@ -14,6 +15,37 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class UserAuthHandler {
   UserAuthHandler._();
+  static saveUserData({
+    required BuildContext context,
+    required StudentAuthModel studentData,
+  }) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final bloc = context.read<SignUpScreenBloc>();
+    final existUser = await firestore
+        .collection('User')
+        .where('StudentEmailId', isEqualTo: studentData.studentEmailId)
+        .get();
+    if (existUser.docs.isNotEmpty) {
+      firestore
+          .collection('User')
+          .doc(existUser.docs.first.id)
+          .update(
+            StudentAuthModel(
+              studentName: studentData.studentName,
+              id: existUser.docs.first.id,
+              studentEmailId: studentData.studentEmailId,
+              createAt: studentData.createAt,
+              isAgree: studentData.isAgree,
+              isGoogleSignIn: studentData.isGoogleSignIn,
+              updateAt: Timestamp.now(),
+              profileImage: studentData.profileImage,
+              isFacebookSignIn: studentData.isFacebookSignIn,
+            ).toMap(),
+          );
+    } else {
+      firestore.collection('User').doc(studentData.id).set(studentData.toMap());
+    }
+  }
 
   static userSignUp({required BuildContext context}) async {
     var bloc = context.read<SignUpScreenBloc>();
@@ -38,7 +70,7 @@ class UserAuthHandler {
           email: state.email,
           password: state.password,
         );
-        await user.user!.sendEmailVerification().then((value) {
+        await user.user!.sendEmailVerification().then((value) async {
           bloc.add(LoadingEvent(isLoading: false));
           bloc.add(AgreeWithTermsAndConditionEvent(isAgree: false));
           bloc.add(
@@ -47,12 +79,19 @@ class UserAuthHandler {
                   'Please check your email inbox to follow the link and verify you email.',
             ),
           );
-          saveUserData(
-            context: context,
-            username: state.username,
-            email: state.email,
+          // here we will save student data in firestore date base
+
+          StudentAuthModel studentData = StudentAuthModel(
+            studentName: state.username,
+            id: user.user!.uid.toString(),
+            studentEmailId: user.user!.email.toString(),
+            createAt: Timestamp.now(),
             isAgree: state.isAgree,
+            isGoogleSignIn: false,
+            profileImage: user.user!.photoURL,
+            isFacebookSignIn: false,
           );
+          saveUserData(context: context, studentData: studentData);
         });
       } on FirebaseAuthException catch (e) {
         bloc.add(LoadingEvent(isLoading: false));
@@ -83,40 +122,6 @@ class UserAuthHandler {
         } else {
           return bloc.add(ErrorEvent(errorMsg: e.code.toString()));
         }
-      }
-    }
-  }
-
-  static saveUserData({
-    String? username,
-    String? email,
-    bool isAgree = false,
-    required BuildContext context,
-  }) async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final bloc = context.read<SignUpScreenBloc>();
-    String userId = DateTime.now().millisecondsSinceEpoch.toString();
-    StudentAuthModel studentAuthModel = StudentAuthModel(
-      studentName: username.toString(),
-      id: userId,
-      studentEmailId: email.toString(),
-      createAt: Timestamp.now(),
-      updateAt: null,
-      isAgree: isAgree,
-      isGoogleSignIn: false,
-    );
-    if (email!.isNotEmpty) {
-      try {
-        await firestore
-            .collection('User')
-            .doc(userId)
-            .set(studentAuthModel.toMap())
-            .then((value) {
-              print(email + isAgree.toString());
-            });
-      } on FirebaseException catch (e) {
-        bloc.add(ErrorEvent(errorMsg: e.message.toString()));
-        print(e.message.toString());
       }
     }
   }
@@ -196,25 +201,82 @@ class UserAuthHandler {
       );
       bloc.add(LoginLoadingEvent(isLoading: true));
       return await userCredential.then((onValue) {
-        String userId = DateTime.now().millisecondsSinceEpoch.toString();
-        FirebaseFirestore firestore = FirebaseFirestore.instance;
-        StudentAuthModel studentAuthModel = StudentAuthModel(
+        StudentAuthModel studentData = StudentAuthModel(
           studentName: googleUser.displayName.toString(),
-          id: userId,
+          id: googleUser.id.toString(),
           studentEmailId: googleUser.email,
           createAt: Timestamp.now(),
           updateAt: null,
           isAgree: true,
           isGoogleSignIn: true,
           profileImage: googleUser.photoUrl,
+          isFacebookSignIn: false,
         );
-        firestore.collection('User').doc(userId).set(studentAuthModel.toMap());
 
+        // Save student data in firestore data base
+        saveUserData(context: context, studentData: studentData);
         bloc.add(LoginLoadingEvent(isLoading: false));
-        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.naveBar,(route)=>false);
+        Navigator.of(
+          context,
+        ).pushNamedAndRemoveUntil(AppRoutes.naveBar, (route) => false);
       });
     } on Exception catch (e) {
       print(e);
+    }
+    return null;
+  }
+
+  static Future<UserCredential?> facebookLogin(BuildContext context) async {
+    final loginBloc = context.read<LoginScreenBloc>();
+    try {
+      loginBloc.add(LoginLoadingEvent(isLoading: true));
+
+      final LoginResult result = await FacebookAuth.instance.login();
+      loginBloc.add(LoginLoadingEvent(isLoading: false));
+      if (result.status == LoginStatus.success) {
+        final user = await FacebookAuth.instance.getUserData();
+        // Create a credential from the access token
+        final OAuthCredential credential = FacebookAuthProvider.credential(
+          result.accessToken!.tokenString,
+        );
+        // Once signed in, return the UserCredential
+        loginBloc.add(LoginLoadingEvent(isLoading: true));
+
+        final userCredential = await FirebaseAuth.instance
+            .signInWithCredential(credential)
+            .then((onValue) {
+              StudentAuthModel studentData = StudentAuthModel(
+                studentName: user['name'].toString(),
+                id: FirebaseAuth.instance.currentUser!.uid.toString(),
+                studentEmailId: user['email'],
+                createAt: Timestamp.now(),
+                isAgree: true,
+                isGoogleSignIn: false,
+                isFacebookSignIn: true,
+                profileImage: user['picture']['data']['url'],
+              );
+              saveUserData(context: context, studentData: studentData);
+              loginBloc.add(LoginLoadingEvent(isLoading: false));
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.naveBar,
+                (route) => false,
+              );
+              return;
+            });
+        return userCredential;
+      }
+      return null;
+    } on FirebaseAuthException catch (e) {
+      loginBloc.add(LoginLoadingEvent(isLoading: false));
+      loginBloc.add(
+        LoginErrorEvent(
+          errorMsg:
+              e.code.toString() == 'account-exists-with-different-credential'
+              ? 'This email is already linked with Google. Please sign in with Google.'
+              : e.code.toString(),
+        ),
+      );
     }
     return null;
   }

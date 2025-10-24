@@ -9,6 +9,7 @@ class StudentAuthModel {
   final Timestamp? updateAt;
   final bool isAgree;
   final bool isGoogleSignIn;
+  final bool isFacebookSignIn;
 
   StudentAuthModel({
     required this.studentName,
@@ -19,6 +20,7 @@ class StudentAuthModel {
     this.updateAt,
     required this.isAgree,
     required this.isGoogleSignIn,
+    required this.isFacebookSignIn,
   });
 
   Map<String, dynamic> toMap() {
@@ -31,6 +33,7 @@ class StudentAuthModel {
       'updateAt': updateAt,
       'IsAgree': isAgree,
       'IsGoogleSignIn': isGoogleSignIn,
+      'IsFacebookSignIn': isFacebookSignIn,
     };
   }
 
@@ -42,6 +45,7 @@ class StudentAuthModel {
       createAt: map['createAt'],
       isAgree: map['IsAgree'],
       isGoogleSignIn: map['IsGoogleSignIn'],
+      isFacebookSignIn: map['IsFacebookSignIn'],
     );
   }
 }

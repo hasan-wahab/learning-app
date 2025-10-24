@@ -15,8 +15,6 @@ import 'package:foodi/common/app_style/app_colors.dart';
 import 'package:foodi/common/app_style/app_size.dart';
 import 'package:foodi/common/app_style/text_style.dart';
 import 'package:foodi/common/images/assets_images.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 import '../../../app_routes/app_routes.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -140,7 +138,6 @@ class LoginScreen extends StatelessWidget {
                 text: state.isLoading != true ? 'Log In' : null,
                 onTap: () {
                   UserAuthHandler.userLogIn(context: context);
-
                 },
               ),
               AppSize.widgetGap(height: 26),
@@ -203,7 +200,9 @@ class LoginScreen extends StatelessWidget {
                             width: 34.w,
                             child: InkWell(
                               onTap: () async {
-                                UserAuthHandler.userSignInWithGoogle(context: context);
+                                UserAuthHandler.userSignInWithGoogle(
+                                  context: context,
+                                );
                               },
                               child: Image(
                                 image: AssetImage(AppAssetsImages.googleImage),
@@ -223,8 +222,13 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(
                             height: 34.01.h,
                             width: 34.w,
-                            child: Image(
-                              image: AssetImage(AppAssetsImages.facbookImage),
+                            child: InkWell(
+                              onTap: (){
+                               UserAuthHandler.facebookLogin(context);
+                              },
+                              child: Image(
+                                image: AssetImage(AppAssetsImages.facbookImage),
+                              ),
                             ),
                           ),
                         ],
