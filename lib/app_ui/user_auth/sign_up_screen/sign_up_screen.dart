@@ -35,23 +35,10 @@ class SignUpScreen extends StatelessWidget {
                 actions: [
                   InkWell(
                     onTap: () {
-                      if (listener.errorMsg ==
-                          'Please check your email inbox to follow the link and verify you email.') {
-                        Navigator.pop(context);
-                        Navigator.pushReplacementNamed(
-                          context,
-                          AppRoutes.loginScreen,
-                        );
-                      } else {
-                        Navigator.pop(context);
-                      }
+                      Navigator.pop(context);
                     },
                     child: ReuseableText(
-                      text:
-                          listener.errorMsg ==
-                              'Please check your email inbox to follow the link and verify you email.'
-                          ? 'Continue'
-                          : 'Ok',
+                      text: 'Ok',
                     ),
                   ),
                 ],
@@ -67,7 +54,6 @@ class SignUpScreen extends StatelessWidget {
           //         toolbarHeight: 66.h,
           //         backgroundColor: Colors.white,
           //         foregroundColor: Colors.white,
-          //
           //         title: ReuseableText(
           //           text: 'Sign Up',
           //           textStyle: AppTStyleAndSize.secondTextStyle(),

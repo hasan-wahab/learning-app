@@ -7,6 +7,7 @@ class AppTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final double height;
   final double width;
+  final String? initValue;
   String Function(String? value)? validator;
   TextEditingController? controller = TextEditingController();
   void Function(String value)? onChange;
@@ -17,6 +18,7 @@ class AppTextField extends StatelessWidget {
     this.hintText,
     this.height = 50,
     this.width = 327,
+    this.initValue,
     this.prefixIcon,
     this.controller,
     this.validator,
@@ -37,7 +39,6 @@ class AppTextField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           prefixIcon: prefixIcon,
-
           hintText: hintText,
           suffixIcon: icon,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r)),

@@ -120,10 +120,15 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ReuseableText(
-                    text: 'Forget password ?',
-                    textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
-                      fontSize: 14,
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, AppRoutes.forgetPasswordScreen);
+                    },
+                    child: ReuseableText(
+                      text: 'Forget password ?',
+                      textStyle: AppTStyleAndSize.fourthSmallTextStyle().copyWith(
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 ],

@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodi/app_routes/app_routes.dart';
 import 'package:foodi/app_ui/datail_screen/detail_bloc/detail_bloc.dart';
@@ -22,16 +21,14 @@ import 'package:foodi/app_ui/nave_bar/search_screens/search_screen.dart';
 import 'package:foodi/app_ui/nave_bar/search_screens/search_screen_bloc/search_screen_bloc.dart';
 import 'package:foodi/app_ui/onboarding_scr/on_boading_screen1.dart';
 import 'package:foodi/app_ui/onboarding_scr/onboarding_person/on_boarding_person_class.dart';
-import 'package:foodi/app_ui/onboarding_scr/on_boarding_secree2.dart';
 import 'package:foodi/app_ui/onboarding_scr/onboarding_person/onboarding_person_bloc/onboarding_person_bloc.dart';
-import 'package:foodi/app_ui/onboarding_scr/onboarding_screen3.dart';
-import 'package:foodi/app_ui/payment_method/card_list/card_list_screen/card_list_screen_bloc/card_list_screen_bloc.dart';
 import 'package:foodi/app_ui/payment_method/card_list/detail_screen/card_detail_screen.dart';
 import 'package:foodi/app_ui/payment_method/card_list/card_list_screen/card_list_screen.dart';
 import 'package:foodi/app_ui/payment_method/card_list/detail_screen/card_detail_screen_bloc/card_details_screen_bloc.dart';
 import 'package:foodi/app_ui/payment_method/card_list/sucess_screen.dart';
 import 'package:foodi/app_ui/user_auth/continue_with_phone/continue_with_phone_bloc/continue_phone_bloc.dart';
 import 'package:foodi/app_ui/user_auth/continue_with_phone/continue_with_phone_screen.dart';
+import 'package:foodi/app_ui/user_auth/login_screen/forget_password/forget_passworod_bloc/forget_bloc.dart';
 import 'package:foodi/app_ui/user_auth/login_screen/login_screen.dart';
 import 'package:foodi/app_ui/user_auth/login_screen/login_screen_bloc/login_screen_bloc.dart';
 import 'package:foodi/app_ui/user_auth/otp_screen/otp_screen.dart';
@@ -41,6 +38,8 @@ import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_screen.dart';
 import 'package:foodi/app_ui/video_player/video_player_bloc/video_player_bloc.dart';
 import 'package:foodi/app_ui/video_player/video_player_screen.dart';
 import 'package:foodi/local_storage_service/local_data/local_data.dart';
+
+import '../app_ui/user_auth/login_screen/forget_password/forget_password_screen.dart';
 
 class AppRouting {
   final String? routeName;
@@ -52,9 +51,6 @@ class AppRouting {
     required this.route,
     required this.bloc,
   });
-  static Future currentUserReload() async {
-    return await FirebaseAuth.instance.currentUser!.reload();
-  }
 
   static List<AppRouting> routeList = [
     AppRouting(
@@ -143,6 +139,11 @@ class AppRouting {
       route: MyCoursesScreen(),
       bloc: BlocProvider(create: (_) => MyCourseScreenBloc(0)),
     ),
+    AppRouting(
+      routeName: AppRoutes.forgetPasswordScreen,
+      route: ForgetPasswordScreen(),
+      bloc: BlocProvider(create: (_) => ForgetPasswordBloc()),
+    ),
   ];
 
   static blocProviderList() {
@@ -158,8 +159,6 @@ class AppRouting {
     BuildContext context,
   ) {
     if (settings.name!.isNotEmpty) {
-      FirebaseAuth auth = FirebaseAuth.instance;
-
       final result = routeList
           .where((test) => test.routeName == settings.name)
           .toList();
@@ -167,24 +166,23 @@ class AppRouting {
       if (result.isNotEmpty) {
         final bool? firstTimeAppOpen;
         firstTimeAppOpen = AppLocalDataStorage.getData();
-
+        FirebaseAuth auth = FirebaseAuth.instance;
         // onBoardingPersonClass - [This is initial route name]
         if (firstTimeAppOpen == true &&
             result.first.routeName == AppRoutes.onBoardingPersonClass) {
           return CupertinoPageRoute(
             builder: (context) {
-              currentUserReload();
-              if (auth.currentUser != null) {
-                return NavBar();
-              } else {
-                return LoginScreen();
-              }
+              return LoginScreen();
+              //   if (auth.currentUser!.emailVerified && auth.currentUser != null) {
+              //     return NavBar();
+              //   }
+              //   return LoginScreen();
             },
-
             settings: settings,
           );
         }
-        print(result.single.routeName);
+
+        // print(result.single.routeName);
 
         // agr haymary pass list may jo b screen ham return karna chahtay hay to wo list may add ho
         // to return karay ga other vise else return karay ga
@@ -198,7 +196,7 @@ class AppRouting {
 
       return CupertinoPageRoute(builder: (_) => OnBoadingScreen1());
     } else {
-      print('setting  is empty');
+      // print('setting  is empty');
       return CupertinoPageRoute(builder: (_) => OnBoardingPersonClass());
     }
   }

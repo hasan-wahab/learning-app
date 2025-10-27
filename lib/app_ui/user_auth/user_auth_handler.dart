@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:foodi/app_routes/app_routes.dart';
+import 'package:foodi/app_ui/user_auth/login_screen/forget_password/forget_passworod_bloc/forget_bloc.dart';
+import 'package:foodi/app_ui/user_auth/login_screen/forget_password/forget_passworod_bloc/forget_event.dart';
 import 'package:foodi/app_ui/user_auth/login_screen/login_screen_bloc/login_screen_bloc.dart';
 import 'package:foodi/app_ui/user_auth/login_screen/login_screen_bloc/login_screen_events.dart';
 import 'package:foodi/app_ui/user_auth/sign_up_screen/sign_up_bloc/sign_up_bloc.dart';
@@ -15,35 +17,44 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class UserAuthHandler {
   UserAuthHandler._();
-  static saveUserData({
+  static Future saveUserData({
     required BuildContext context,
     required StudentAuthModel studentData,
   }) async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final bloc = context.read<SignUpScreenBloc>();
-    final existUser = await firestore
-        .collection('User')
-        .where('StudentEmailId', isEqualTo: studentData.studentEmailId)
-        .get();
-    if (existUser.docs.isNotEmpty) {
-      firestore
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      final existUser = await firestore
           .collection('User')
-          .doc(existUser.docs.first.id)
-          .update(
-            StudentAuthModel(
-              studentName: studentData.studentName,
-              id: existUser.docs.first.id,
-              studentEmailId: studentData.studentEmailId,
-              createAt: studentData.createAt,
-              isAgree: studentData.isAgree,
-              isGoogleSignIn: studentData.isGoogleSignIn,
-              updateAt: Timestamp.now(),
-              profileImage: studentData.profileImage,
-              isFacebookSignIn: studentData.isFacebookSignIn,
-            ).toMap(),
-          );
-    } else {
-      firestore.collection('User').doc(studentData.id).set(studentData.toMap());
+          .where('StudentEmailId', isEqualTo: studentData.studentEmailId)
+          .get();
+      if (existUser.docs.isNotEmpty) {
+        await firestore
+            .collection('User')
+            .doc(existUser.docs.first.id)
+            .update(
+              StudentAuthModel(
+                studentName: studentData.studentName,
+                id: existUser.docs.first.id,
+                studentEmailId: studentData.studentEmailId,
+                createAt: studentData.createAt,
+                isAgree: studentData.isAgree,
+                isGoogleSignIn: studentData.isGoogleSignIn,
+                updateAt: Timestamp.now(),
+                profileImage: studentData.profileImage,
+                isFacebookSignIn: studentData.isFacebookSignIn,
+              ).toMap(),
+            );
+        print('Old user');
+      } else {
+        await firestore
+            .collection('User')
+            .doc(studentData.id)
+            .set(studentData.toMap());
+        print('New user');
+      }
+    } on FirebaseException catch (e) {
+      print('Data save exception${e.message.toString()}');
     }
   }
 
@@ -88,10 +99,14 @@ class UserAuthHandler {
             createAt: Timestamp.now(),
             isAgree: state.isAgree,
             isGoogleSignIn: false,
-            profileImage: user.user!.photoURL,
+            profileImage: user.user!.photoURL.toString(),
             isFacebookSignIn: false,
           );
-          saveUserData(context: context, studentData: studentData);
+          saveUserData(context: context, studentData: studentData).then((
+            onValue,
+          ) {
+            Navigator.pushNamed(context, AppRoutes.loginScreen);
+          });
         });
       } on FirebaseAuthException catch (e) {
         bloc.add(LoadingEvent(isLoading: false));
@@ -180,9 +195,9 @@ class UserAuthHandler {
     final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
 
     try {
-      bloc.add(LoginLoadingEvent(isLoading: true));
-      await googleSignIn.signOut();
-      bloc.add(LoginLoadingEvent(isLoading: false));
+      // bloc.add(LoginLoadingEvent(isLoading: true));
+      // await googleSignIn.signOut();
+      // bloc.add(LoginLoadingEvent(isLoading: false));
       bloc.add(LoginLoadingEvent(isLoading: true));
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       bloc.add(LoginLoadingEvent(isLoading: false));
@@ -279,5 +294,53 @@ class UserAuthHandler {
       );
     }
     return null;
+  }
+
+  static forgetPassword(
+    BuildContext context,
+    TextEditingController controller,
+  ) async {
+    final forgetPasswordBloc = context.read<ForgetPasswordBloc>();
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final email = forgetPasswordBloc.state.email;
+    if (email.isEmpty) {
+      forgetPasswordBloc.add(
+        ForgetPasswordSendErrorEvent(
+          error: 'Please enter your email to forget the password',
+        ),
+      );
+    } else {
+      try {
+        forgetPasswordBloc.add(ForgetPasswordSendLoadingEvent(isLoading: true));
+        await auth.sendPasswordResetEmail(email: email).then((onValue) {
+          forgetPasswordBloc.add(
+            ForgetPasswordSendLoadingEvent(isLoading: false),
+          );
+          forgetPasswordBloc.add(
+            ForgetPasswordSendErrorEvent(
+              error:
+                  'Please check your email inbox to reset your password and sign in',
+            ),
+          );
+          forgetPasswordBloc.add(ForgetPasswordSendEmailEvent(email: ''));
+          Navigator.pop(context);
+          controller.clear();
+          // forgetPasswordBloc.add(
+          //   ForgetPasswordSendEmailController(
+          //     controller:controller,
+          //   ),
+          // );
+        });
+      } on FirebaseAuthException catch (e) {
+        forgetPasswordBloc.add(
+          ForgetPasswordSendLoadingEvent(isLoading: false),
+        );
+        forgetPasswordBloc.add(
+          ForgetPasswordSendErrorEvent(error: e.message.toString()),
+        );
+        print(e.code.toString());
+      }
+    }
   }
 }
