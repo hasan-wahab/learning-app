@@ -159,6 +159,7 @@ class AppRouting {
     BuildContext context,
   ) {
     if (settings.name!.isNotEmpty) {
+
       final result = routeList
           .where((test) => test.routeName == settings.name)
           .toList();
@@ -167,22 +168,24 @@ class AppRouting {
         final bool? firstTimeAppOpen;
         firstTimeAppOpen = AppLocalDataStorage.getData();
         FirebaseAuth auth = FirebaseAuth.instance;
+
         // onBoardingPersonClass - [This is initial route name]
         if (firstTimeAppOpen == true &&
             result.first.routeName == AppRoutes.onBoardingPersonClass) {
           return CupertinoPageRoute(
             builder: (context) {
-              return LoginScreen();
-              //   if (auth.currentUser!.emailVerified && auth.currentUser != null) {
-              //     return NavBar();
-              //   }
-              //   return LoginScreen();
+              //return LoginScreen();
+              auth.currentUser?.reload();
+              if ( auth.currentUser==null) {
+                return LoginScreen();
+              }
+              return NavBar();
             },
             settings: settings,
           );
         }
 
-        // print(result.single.routeName);
+         print(result.single.routeName);
 
         // agr haymary pass list may jo b screen ham return karna chahtay hay to wo list may add ho
         // to return karay ga other vise else return karay ga

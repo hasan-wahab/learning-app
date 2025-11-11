@@ -1,10 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodi/local_storage_service/local_data/local_data.dart';
-
 import 'app_routes/onGenerateRoute.dart';
 
 void main() async {
@@ -18,6 +16,7 @@ void main() async {
       projectId: "learningapp-4c35b",
     ),
   );
+
   runApp(
     ScreenUtilInit(
       designSize: Size(375, 812),
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      // ya syntext serep ek hi list or same type ka list hum es tarah direct pass kar saktay hay
+      // ya syntex serep ek hi list or same type ka list hum es tarah direct pass kar saktay hay
       //providers: AppRouting.blocProviderList(),
       providers: AppRouting.blocProviderList(),
 
