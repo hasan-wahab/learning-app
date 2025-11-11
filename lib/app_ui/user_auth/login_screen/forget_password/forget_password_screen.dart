@@ -46,7 +46,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               ForgetPasswordSendErrorEvent(error: ''),
             );
           });
-        } else {}
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -87,7 +87,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       : null,
                   onTap: () {
                     if (state.email != '') {
-                      UserAuthHandler.forgetPassword(context, controller);
+                      UserAuthHandler.userForgetPassword(context, controller);
                     } else {
                       context.read<ForgetPasswordBloc>().add(
                         ForgetPasswordSendErrorEvent(

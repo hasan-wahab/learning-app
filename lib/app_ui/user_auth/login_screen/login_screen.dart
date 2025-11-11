@@ -229,7 +229,7 @@ class LoginScreen extends StatelessWidget {
                             width: 34.w,
                             child: InkWell(
                               onTap: (){
-                               UserAuthHandler.facebookLogin(context);
+                               UserAuthHandler.userFacebookLogin(context);
                               },
                               child: Image(
                                 image: AssetImage(AppAssetsImages.facbookImage),

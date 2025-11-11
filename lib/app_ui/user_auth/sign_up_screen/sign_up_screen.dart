@@ -37,14 +37,15 @@ class SignUpScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: ReuseableText(
-                      text: 'Ok',
-                    ),
+                    child: ReuseableText(text: 'Ok'),
                   ),
                 ],
               );
             },
-          );
+          ).then((onValue) {
+            context.read<SignUpScreenBloc>().add(ErrorEvent(errorMsg: ''));
+
+          });
         }
       },
       builder: (context, state) {

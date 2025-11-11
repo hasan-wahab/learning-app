@@ -241,7 +241,7 @@ class UserAuthHandler {
     return null;
   }
 
-  static Future<UserCredential?> facebookLogin(BuildContext context) async {
+  static Future<UserCredential?> userFacebookLogin(BuildContext context) async {
     final loginBloc = context.read<LoginScreenBloc>();
     try {
       loginBloc.add(LoginLoadingEvent(isLoading: true));
@@ -296,7 +296,7 @@ class UserAuthHandler {
     return null;
   }
 
-  static forgetPassword(
+  static userForgetPassword(
     BuildContext context,
     TextEditingController controller,
   ) async {
